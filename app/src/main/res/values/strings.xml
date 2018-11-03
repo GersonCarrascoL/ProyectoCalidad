@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">LibroReclamaciones</string>
+    <string name="title_activity_maps">Map</string>
+
+    //LOGIN VARIABLES
+    <string name="login_title">RECLAMOS DIGITAL</string>
+    <string name="login_email">Email</string>
+    <string name="login_password">Password</string>
+    <string name="login_btn">INICIAR SESIÓN</string>
+    <string name="login_register">REGISTRO</string>
+    <string name="title_activity_maps2">Map</string>
+
+    //NAVIGATION ITEMS
+    <string name="navigation_map">Mapa</string>
+    <string name="navigation_perfil">Mi Perfil</string>
+    <string name="navigation_logout">Cerrar Sesión</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
