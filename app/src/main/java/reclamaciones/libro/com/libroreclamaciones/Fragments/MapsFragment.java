@@ -2,6 +2,7 @@ package reclamaciones.libro.com.libroreclamaciones.Fragments;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -23,14 +24,20 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import reclamaciones.libro.com.libroreclamaciones.Class.InfoWindow;
+import reclamaciones.libro.com.libroreclamaciones.CustomInfoWindowGoogleMap;
+import reclamaciones.libro.com.libroreclamaciones.EnterpriseActivity;
 import reclamaciones.libro.com.libroreclamaciones.R;
 
 
-public class MapsFragment extends Fragment implements OnMapReadyCallback {
+public class MapsFragment extends Fragment implements OnMapReadyCallback,GoogleMap.OnMarkerClickListener{
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -48,6 +55,37 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
             mMap.setMyLocationEnabled(true);
             mMap.getUiSettings().setMyLocationButtonEnabled(true);
         }
+
+        // CREAR MARKER OPTIONS
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions
+                .position(new LatLng(-11.9757177,-76.9941974))
+                .title("Cerca de mi casa")
+                .snippet("Muy cerca")
+                .icon((BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+
+        // SE CREA LA CLASE QUE RECIBE TODA LA INFO PARA EL INFO WINDOW
+        InfoWindow infoWindow = new InfoWindow();
+        infoWindow.setEnterprise_name("Empresa 1");
+        infoWindow.setEnterprise_direction("Av San Martin cdra 65 Jr Santuario");
+
+        //SE SETEA EL CREADOR DEL INFO WINDOW
+        CustomInfoWindowGoogleMap customInfoWindowGoogleMap = new CustomInfoWindowGoogleMap(getActivity());
+        mMap.setInfoWindowAdapter(customInfoWindowGoogleMap);
+
+        // SE AGREGA EL MARCADOR Y SE SETEA EL INFO WINDOW AL MARKER
+        Marker m = mMap.addMarker(markerOptions);
+        m.setTag(infoWindow);
+        m.showInfoWindow();
+
+        //CUANDO CLICKEAS EN EL INFO WINDOW ABRE OTRO LISTENER
+        googleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                Intent intent = new Intent(getActivity(),EnterpriseActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public MapsFragment() {
@@ -174,4 +212,14 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
             }
         }
     }
+
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        Intent intent = new Intent(getActivity(),EnterpriseActivity.class);
+        startActivity(intent);
+        return true;
+    }
+
+
 }

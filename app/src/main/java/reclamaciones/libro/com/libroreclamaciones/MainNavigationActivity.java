@@ -5,8 +5,6 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 
-import androidx.appcompat.widget.SearchView;
-import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -15,6 +13,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import androidx.appcompat.widget.Toolbar;
@@ -26,6 +25,7 @@ import reclamaciones.libro.com.libroreclamaciones.Fragments.ProfileFragment;
 
 
 import com.google.android.material.navigation.NavigationView;
+import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 
 public class MainNavigationActivity extends AppCompatActivity {
@@ -33,18 +33,22 @@ public class MainNavigationActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private boolean searchMapFragment = false;
     private ActionBarDrawerToggle mDrawerToggle;
-    Toolbar toolbar;
+    private Toolbar toolbar;
+    private MaterialSearchView searchView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_context);
 
-        setTollbar();
+        toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
+        setSupportActionBar(toolbar);
 
         drawerLayout = findViewById(R.id.drawer_layout);
 
         NavigationView navigationView = findViewById(R.id.navigation_view);
 
+        searchView = findViewById(R.id.search_view);
 
         if( navigationView != null ){
             setupDrawerContent(navigationView);
@@ -59,50 +63,39 @@ public class MainNavigationActivity extends AppCompatActivity {
             drawerLayout.setDrawerListener(mDrawerToggle);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setHomeButtonEnabled(true);
-            getSupportActionBar().setTitle("");
             mDrawerToggle.syncState();
-
         }
 
         setFragment(0);
     }
 
-    private void setTollbar(){
-        toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
-        setSupportActionBar(toolbar);
-        final ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null){
-            actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp);
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
-    }
 
-   /* @Override
+    @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         return false;
     }
 
-    @Override
+
+
+        @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if (!drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            getMenuInflater().inflate(R.menu.search_toolbar, menu);
-            return true;
-        }
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.search_toolbar, menu);
+        MenuItem item = menu.findItem(R.id.action_search);
+        searchView.setMenuItem(item);
+//        searchView = (MaterialSearchView)menu.findItem(R.id.action_search).getActionView();
+        return true;
+    }
 
-        return super.onCreateOptionsMenu(menu);
-    }*/
-
-   /* @Override
+   @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Log.d("Hola",item.toString());
         switch (item.getItemId()) {
             case android.R.id.home:
                 drawerLayout.openDrawer(GravityCompat.START);
                 return true;
         }
         return super.onOptionsItemSelected(item);
-    }*/
+    }
 
     private void setupDrawerContent( NavigationView navigationView){
         navigationView.setNavigationItemSelectedListener(
@@ -143,6 +136,7 @@ public class MainNavigationActivity extends AppCompatActivity {
                 MapsFragment mapsFragment = new MapsFragment();
                 fragmentTransaction.replace(R.id.main_content,mapsFragment);
                 fragmentTransaction.commit();
+                getSupportActionBar().setTitle("Suuuppeerr");
                 break;
 
             case 1:
@@ -151,6 +145,7 @@ public class MainNavigationActivity extends AppCompatActivity {
                 ProfileFragment profileFragment = new ProfileFragment();
                 fragmentTransaction.replace(R.id.main_content,profileFragment);
                 fragmentTransaction.commit();
+                getSupportActionBar().setTitle("MI PERFIL");
                 break;
             case 2:
                 Intent intent = new Intent(MainNavigationActivity.this,LoginActivity.class);
