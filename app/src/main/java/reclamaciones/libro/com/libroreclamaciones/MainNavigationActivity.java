@@ -2,6 +2,7 @@ package reclamaciones.libro.com.libroreclamaciones;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.appcompat.widget.SearchView;
@@ -31,7 +32,8 @@ public class MainNavigationActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
     private boolean searchMapFragment = false;
-
+    private ActionBarDrawerToggle mDrawerToggle;
+    Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,13 +48,27 @@ public class MainNavigationActivity extends AppCompatActivity {
 
         if( navigationView != null ){
             setupDrawerContent(navigationView);
+            mDrawerToggle = new ActionBarDrawerToggle(
+                    this,                    //* host Activity *//*
+                    drawerLayout,                    //* DrawerLayout object *//*
+                    toolbar,
+                    R.string.app_name,  //* "open drawer" description for accessibility *//*
+                    R.string.app_name  //* "close drawer" description for accessibility *//*
+            );
+            mDrawerToggle.syncState();
+            drawerLayout.setDrawerListener(mDrawerToggle);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeButtonEnabled(true);
+            getSupportActionBar().setTitle("");
+            mDrawerToggle.syncState();
+
         }
 
         setFragment(0);
     }
 
     private void setTollbar(){
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
         setSupportActionBar(toolbar);
         final ActionBar actionBar = getSupportActionBar();
@@ -62,7 +78,7 @@ public class MainNavigationActivity extends AppCompatActivity {
         }
     }
 
-    @Override
+   /* @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         return false;
     }
@@ -75,9 +91,9 @@ public class MainNavigationActivity extends AppCompatActivity {
         }
 
         return super.onCreateOptionsMenu(menu);
-    }
+    }*/
 
-    @Override
+   /* @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Log.d("Hola",item.toString());
         switch (item.getItemId()) {
@@ -86,7 +102,7 @@ public class MainNavigationActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 
     private void setupDrawerContent( NavigationView navigationView){
         navigationView.setNavigationItemSelectedListener(

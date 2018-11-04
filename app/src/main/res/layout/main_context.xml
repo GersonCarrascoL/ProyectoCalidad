@@ -4,23 +4,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <!-- APP BAR LAYOUT -->
-    <com.google.android.material.appbar.AppBarLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent">
-        <!-- TOOLBAR LAYOUT -->
-        <androidx.appcompat.widget.Toolbar
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            style="@style/ThemeOverlay.MaterialComponents.ActionBar"
-            android:id="@+id/toolbar"
-            android:elevation="3dp"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:minHeight="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            />
-    </com.google.android.material.appbar.AppBarLayout>
 
     <!-- DRAWER LAYOUT -->
     <androidx.drawerlayout.widget.DrawerLayout
@@ -30,6 +13,7 @@
         android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:fitsSystemWindows="true"
         app:layout_scrollFlags="scroll|enterAlways"
         tools:openDrawer="start">
@@ -37,13 +21,34 @@
         <FrameLayout
             android:id="@+id/main_content"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
 
-        <com.google.android.material.navigation.NavigationView
+            <!-- APP BAR LAYOUT -->
+            <com.google.android.material.appbar.AppBarLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent">
+                <!-- TOOLBAR LAYOUT -->
+                <androidx.appcompat.widget.Toolbar
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/toolbar"
+                    android:elevation="3dp"
+                    app:title=" "
+                    android:minHeight="?attr/actionBarSize"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/colorPrimary"
+                    />
+            </com.google.android.material.appbar.AppBarLayout>
+
+        </FrameLayout>
+
+
+    <com.google.android.material.navigation.NavigationView
             android:id="@+id/navigation_view"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_gravity="start|left"
+            android:layout_gravity="start"
             app:headerLayout="@layout/navigation_header"
             app:menu="@menu/navigation_menu" />
     </androidx.drawerlayout.widget.DrawerLayout>
