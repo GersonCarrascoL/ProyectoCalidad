@@ -35,11 +35,13 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
+            android:value="AIzaSyDmTMO3eZCjk7qrI3u4TtTKJ6phtSuaMpk" />
 
         <activity android:name=".RegisterActivity" />
         <activity android:name=".MainNavigationActivity" />
-        <activity android:name=".EnterpriseActivity"></activity>
+        <activity android:name=".EnterpriseActivity" />
+        <activity android:name=".RegisterActivity2" />
+        <activity android:name=".RegisterActivity3"></activity>
     </application>
 
 </manifest>

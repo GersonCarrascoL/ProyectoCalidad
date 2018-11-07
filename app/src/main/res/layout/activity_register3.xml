@@ -4,10 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".RegisterActivity">
-
-    <!-- CONTINUA LA VISTA -->
+    tools:context=".RegisterActivity3">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,7 +19,7 @@
             android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="69dp"
-            android:text="¿Cómo te llamas?"
+            android:text="Crea su cuenta"
             android:textAlignment="center"
             android:textSize="24sp" />
 
@@ -32,12 +29,12 @@
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/registro_nombre"
+                android:id="@+id/login_email"
                 style="@style/ThemeOverlay.MaterialComponents.TextInputEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
-                android:hint="Nombre"
+                android:hint="Usuario"
                 android:paddingBottom="10dp" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -48,43 +45,25 @@
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/registro_apellido"
+                android:id="@+id/login_password"
                 style="@style/ThemeOverlay.MaterialComponents.TextInputEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:hint="Apellido"
-                android:paddingBottom="10dp" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:errorEnabled="true">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/registro_dni"
-                style="@style/ThemeOverlay.MaterialComponents.TextInputEditText"
-                android:layout_width="127dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:gravity="center_vertical"
-                android:hint="DNI"
-                android:inputType="number"
-                android:paddingBottom="10dp" />
+                android:hint="@string/login_password"
+                android:paddingBottom="10dp"
+                android:layout_marginBottom="20dp"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/siguiente1_btn"
+            android:id="@+id/btn_register"
             style="@style/Widget.MaterialComponents.Button"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
-            android:text="Siguiente"
+            android:text="REGISTRARSE"
             app:cornerRadius="0dp" />
 
     </LinearLayout>
+
 
 </LinearLayout>

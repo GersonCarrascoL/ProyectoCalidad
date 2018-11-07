@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterActivity2">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="20dp"
+        android:gravity="center"
+        android:paddingRight="20dp">
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:text="Información básica"
+            android:textAlignment="center"
+            android:textSize="24sp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:errorEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/registro_email"
+                style="@style/ThemeOverlay.MaterialComponents.TextInputEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:paddingBottom="10dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="69dp"
+            app:errorEnabled="true">
+
+            <com.jaredrummler.materialspinner.MaterialSpinner
+                android:id="@+id/spinner_distrito"
+                android:layout_width="229dp"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:hint="Distrito"
+                android:textSize="18sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="69dp"
+            app:errorEnabled="true">
+
+            <com.jaredrummler.materialspinner.MaterialSpinner
+                android:id="@+id/spinner_ocupacion"
+                android:layout_width="179dp"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:hint="Ocupacion"
+                android:textSize="18sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="69dp"
+            app:errorEnabled="true">
+
+            <com.jaredrummler.materialspinner.MaterialSpinner
+                android:id="@+id/spinner_gradoEducativo"
+                android:layout_width="246dp"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:hint="Grado educativo"
+                android:textSize="18sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="69dp"
+            app:errorEnabled="true">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/siguiente2_btn"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="match_parent"
+                android:layout_height="58dp"
+                android:layout_marginBottom="15dp"
+                android:gravity="center"
+                android:text="Siguiente"
+                android:textAlignment="center"
+                app:cornerRadius="0dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
