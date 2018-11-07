@@ -1,7 +1,8 @@
-package reclamaciones.libro.com.libroreclamaciones;
+package reclamaciones.libro.com.libroreclamaciones.presentation.register;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import reclamaciones.libro.com.libroreclamaciones.R;
 
 import android.os.Bundle;
 

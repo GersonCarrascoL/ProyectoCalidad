@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "537008630702",
+    "firebase_url": "https://proyectocalidad-218517.firebaseio.com",
+    "project_id": "proyectocalidad-218517",
+    "storage_bucket": "proyectocalidad-218517.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:537008630702:android:b229c0dcc69bdaf3",
+        "android_client_info": {
+          "package_name": "reclamaciones.libro.com.libroreclamaciones"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "537008630702-iktfe47v4fg06occdlkripek5d9jsqvv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUv1B4gtjX3Ctp3nEKQ7Dp1P7lM9QLWWw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

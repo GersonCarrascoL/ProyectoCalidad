@@ -1,4 +1,4 @@
-package reclamaciones.libro.com.libroreclamaciones;
+package reclamaciones.libro.com.libroreclamaciones.utils;
 
 import android.app.Activity;
 import android.content.Context;
@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Marker;
+
+import reclamaciones.libro.com.libroreclamaciones.R;
 
 
 public class CustomInfoWindowGoogleMap implements GoogleMap.InfoWindowAdapter {

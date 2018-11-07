@@ -10,6 +10,14 @@
     <string name="login_register">REGISTRO</string>
     <string name="title_activity_maps2">Map</string>
 
+    //VALIDATION LOGIN
+    <string name="email_required">Correo requerido</string>
+    <string name="password_invalid">Contraseña incorrecta</string>
+    <string name="cant_pass">No puede ingresar</string>
+    <string name="success">Acceso correcto</string>
+    <string name="error_connect">No se puede conectar</string>
+    <string name="email_password_ws_error">Usuario y/o Contraseña incorrecto</string>
+
     //NAVIGATION ITEMS
     <string name="navigation_map">Mapa</string>
     <string name="navigation_perfil">Mi Perfil</string>

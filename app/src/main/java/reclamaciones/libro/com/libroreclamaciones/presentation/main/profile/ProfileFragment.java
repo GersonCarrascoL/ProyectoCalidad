@@ -1,4 +1,4 @@
-package reclamaciones.libro.com.libroreclamaciones.Fragments;
+package reclamaciones.libro.com.libroreclamaciones.presentation.main.profile;
 
 import android.content.Context;
 import android.net.Uri;

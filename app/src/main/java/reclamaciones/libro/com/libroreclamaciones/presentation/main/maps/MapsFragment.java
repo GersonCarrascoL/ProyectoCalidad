@@ -1,4 +1,4 @@
-package reclamaciones.libro.com.libroreclamaciones.Fragments;
+package reclamaciones.libro.com.libroreclamaciones.presentation.main.maps;
 
 import android.Manifest;
 import android.content.Context;
@@ -31,9 +31,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import reclamaciones.libro.com.libroreclamaciones.Class.InfoWindow;
-import reclamaciones.libro.com.libroreclamaciones.CustomInfoWindowGoogleMap;
-import reclamaciones.libro.com.libroreclamaciones.EnterpriseActivity;
+import reclamaciones.libro.com.libroreclamaciones.data.model.InfoWindow;
+import reclamaciones.libro.com.libroreclamaciones.utils.CustomInfoWindowGoogleMap;
+import reclamaciones.libro.com.libroreclamaciones.presentation.enterprise.EnterpriseActivity;
 import reclamaciones.libro.com.libroreclamaciones.R;
 
 

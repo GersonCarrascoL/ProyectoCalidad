@@ -1,4 +1,4 @@
-package reclamaciones.libro.com.libroreclamaciones.Class;
+package reclamaciones.libro.com.libroreclamaciones.data.model;
 
 public class InfoWindow {
     private String enterprise_name;
