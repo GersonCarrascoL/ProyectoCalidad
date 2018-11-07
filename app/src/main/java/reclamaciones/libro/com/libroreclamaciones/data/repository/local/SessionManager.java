@@ -50,5 +50,9 @@ public class SessionManager {
         editor.putBoolean(KEY_SESSION,false);
         editor.commit();
     }
+
+    public boolean isActive(){
+        return preferences.getBoolean(KEY_SESSION,false);
+    }
     //END SESSION
 }

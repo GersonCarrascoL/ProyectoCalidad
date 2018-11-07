@@ -17,6 +17,8 @@ import android.view.MenuItem;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import butterknife.BindView;
+import reclamaciones.libro.com.libroreclamaciones.data.repository.local.SessionManager;
 import reclamaciones.libro.com.libroreclamaciones.presentation.main.maps.MapsFragment;
 
 import reclamaciones.libro.com.libroreclamaciones.presentation.main.profile.ProfileFragment;
@@ -28,13 +30,15 @@ import com.google.android.material.navigation.NavigationView;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 
-public class MainNavigationActivity extends AppCompatActivity {
+public class MainNavigationActivity extends AppCompatActivity implements MainNavigationContract{
 
     private DrawerLayout drawerLayout;
     private boolean searchMapFragment = false;
     private ActionBarDrawerToggle mDrawerToggle;
     private Toolbar toolbar;
     private MaterialSearchView searchView;
+    private SessionManager session;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,7 +87,6 @@ public class MainNavigationActivity extends AppCompatActivity {
         menuInflater.inflate(R.menu.search_toolbar, menu);
         MenuItem item = menu.findItem(R.id.action_search);
         searchView.setMenuItem(item);
-//        searchView = (MaterialSearchView)menu.findItem(R.id.action_search).getActionView();
         return true;
     }
 
@@ -136,7 +139,7 @@ public class MainNavigationActivity extends AppCompatActivity {
                 MapsFragment mapsFragment = new MapsFragment();
                 fragmentTransaction.replace(R.id.main_content,mapsFragment);
                 fragmentTransaction.commit();
-                getSupportActionBar().setTitle("Suuuppeerr");
+                getSupportActionBar().setTitle("Mapa");
                 break;
 
             case 1:
@@ -145,13 +148,20 @@ public class MainNavigationActivity extends AppCompatActivity {
                 ProfileFragment profileFragment = new ProfileFragment();
                 fragmentTransaction.replace(R.id.main_content,profileFragment);
                 fragmentTransaction.commit();
-                getSupportActionBar().setTitle("MI PERFIL");
+                getSupportActionBar().setTitle("Perfil");
                 break;
             case 2:
-                Intent intent = new Intent(MainNavigationActivity.this,LoginActivity.class);
-                startActivity(intent);
+                startLogOutActivity();
                 break;
         }
     }
 
+    @Override
+    public void startLogOutActivity() {
+        session = SessionManager.getInstance(getApplicationContext());
+        session.logOut();
+        Intent loginIntent = new Intent().setClass(MainNavigationActivity.this,LoginActivity.class);
+        loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(loginIntent);
+    }
 }

@@ -2,6 +2,8 @@
     <string name="app_name">LibroReclamaciones</string>
     <string name="title_activity_maps">Map</string>
 
+    <string name="default_loading_text">Cargando...</string>
+
     //LOGIN VARIABLES
     <string name="login_title">RECLAMOS DIGITAL</string>
     <string name="login_email">Email</string>
@@ -9,6 +11,10 @@
     <string name="login_btn">INICIAR SESIÓN</string>
     <string name="login_register">REGISTRO</string>
     <string name="title_activity_maps2">Map</string>
+    <string name="welcome">Bienvenido de nuevo,</string>
+    <string name="login_order">Inicia sesión para continuar</string>
+    <string name="new_user">Nuevo usuario?</string>
+    <string name="register"> Regístrate</string>
 
     //VALIDATION LOGIN
     <string name="email_required">Correo requerido</string>
@@ -17,6 +23,7 @@
     <string name="success">Acceso correcto</string>
     <string name="error_connect">No se puede conectar</string>
     <string name="email_password_ws_error">Usuario y/o Contraseña incorrecto</string>
+
 
     //NAVIGATION ITEMS
     <string name="navigation_map">Mapa</string>

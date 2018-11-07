@@ -9,4 +9,7 @@
     <color name="primaryTextColor">#ffffff</color>
     <color name="secondaryTextColor">#212121</color>
     <color name="foreground_material_light">#ffffff</color>
+
+
+    <color name="grey">#424242</color>
 </resources>

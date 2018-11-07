@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.button.MaterialButton;
@@ -36,8 +37,8 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     TextInputEditText et_password;
     @BindView(R.id.btn_login)
     MaterialButton btn_login;
-    @BindView(R.id.btn_register)
-    MaterialButton btn_register;
+    @BindView(R.id.text_register)
+    TextView text_register;
 
     //VARIABLES GLOBAL
     private ProgressDialog mProgressDialog;
@@ -55,6 +56,23 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         if (presenter == null){
             presenter = new LoginPresenter(context);
         }
+
+        mProgressDialog = new ProgressDialog(context,R.style.MyProgressDialogTheme);
+        mProgressDialog.setMessage(getText(R.string.default_loading_text));
+        mProgressDialog.setCancelable(false);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getPresenter().onViewAttach(LoginActivity.this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        hideLoadingDialog();
+        getPresenter().onViewDettach();
     }
 
 
@@ -171,7 +189,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     /*
     OnClick
     */
-    @OnClick({ R.id.btn_login, R.id.btn_register})
+    @OnClick({ R.id.btn_login, R.id.text_register})
     public void onViewClicked(View view){
         Log.d("SUuuuuper","Dupppppppeeeeer");
         switch (view.getId()){
@@ -179,7 +197,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
                 Log.d("Ingresando","Usando login");
                 login();
                 break;
-            case R.id.btn_register:
+            case R.id.text_register:
                 Log.d("Ingresando","Usando registro");
                 launchSignUp();
                 break;

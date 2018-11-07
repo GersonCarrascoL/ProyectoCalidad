@@ -62,11 +62,16 @@ public class LoginPresenter implements LoginContract.Presenter{
                         JsonObject jsonObject = response.body();
                         Log.d("uooasdas", jsonObject.toString());
                         int status = jsonObject.get("status").getAsInt();
-                        String token = jsonObject.get("token").toString();
+
                         switch (status){
                             case 1:
+                                String token = jsonObject.get("token").toString();
+
                                 session.setKeyToken(token);
+
+                                session.login();
                                 if (isAttached()){
+                                    Log.d("ATTACHHED","Se esta retornando la vista");
                                     getView().hideLoadingDialog();
                                     getView().showSuccessToast();
                                     getView().launchHome();
@@ -83,9 +88,6 @@ public class LoginPresenter implements LoginContract.Presenter{
                             case 4:
                                 break;
                         }
-                        session.login();
-
-
                     }
                 }
             }
