@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.renderscript.ScriptGroup;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
@@ -23,7 +22,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import reclamaciones.libro.com.libroreclamaciones.R;
 import reclamaciones.libro.com.libroreclamaciones.presentation.main.MainNavigationActivity;
-import reclamaciones.libro.com.libroreclamaciones.presentation.register.RegisterActivity;
+import reclamaciones.libro.com.libroreclamaciones.presentation.register.view_one.RegisterActivity;
 
 public class LoginActivity extends AppCompatActivity implements LoginContract.View{
 

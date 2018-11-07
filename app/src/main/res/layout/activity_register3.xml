@@ -4,10 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".presentation.register.view_one.RegisterActivity">
-
-    <!-- CONTINUA LA VISTA -->
+    tools:context=".presentation.register.view_three.RegisterActivity3">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,7 +19,7 @@
             android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="69dp"
-            android:text="¿Cómo te llamas?"
+            android:text="Crea su cuenta"
             android:textAlignment="center"
             android:textSize="24sp" />
 
@@ -32,15 +29,33 @@
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/register_name"
+                android:id="@+id/register_dni"
                 style="@style/ThemeOverlay.MaterialComponents.TextInputEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
-                android:hint="Nombre"
-                android:paddingBottom="10dp"
-                android:maxLines="1"/>
+                android:gravity="center_vertical"
+                android:hint="@string/register_dni"
+                android:inputType="number"
+                android:paddingBottom="10dp" />
 
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:errorEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/register_password"
+                style="@style/ThemeOverlay.MaterialComponents.TextInputEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/login_password"
+                android:inputType="textPassword"
+                android:paddingBottom="10dp"
+                android:layout_marginBottom="20dp"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -49,27 +64,26 @@
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/register_last_name"
+                android:id="@+id/register_confirm_password"
                 style="@style/ThemeOverlay.MaterialComponents.TextInputEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:hint="Apellido"
+                android:hint="@string/confirm_password"
+                android:inputType="textPassword"
                 android:paddingBottom="10dp"
-                android:maxLines="1"/>
+                android:layout_marginBottom="20dp"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
-
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_next"
+            android:id="@+id/btn_register"
             style="@style/Widget.MaterialComponents.Button"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_marginBottom="15dp"
-            android:text="Siguiente"
+            android:text="REGISTRARSE"
             app:cornerRadius="0dp" />
 
     </LinearLayout>
+
 
 </LinearLayout>
