@@ -6,7 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".presentation.enterprise.EnterpriseActivity">
 
-    <include layout="@layout/toolbar"/>
+    <include
+        android:id="@+id/toolbar_general"
+        layout="@layout/toolbar"/>
 
     <!-- CONTINUA LA VISTA -->
 

@@ -4,7 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 
+import androidx.appcompat.widget.SearchView;
 import androidx.core.view.GravityCompat;
+import androidx.core.view.MenuItemCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 
@@ -17,7 +19,7 @@ import android.view.MenuItem;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import butterknife.BindView;
+
 import reclamaciones.libro.com.libroreclamaciones.data.repository.local.SessionManager;
 import reclamaciones.libro.com.libroreclamaciones.presentation.main.maps.MapsFragment;
 
@@ -29,13 +31,13 @@ import reclamaciones.libro.com.libroreclamaciones.presentation.login.LoginActivi
 import com.google.android.material.navigation.NavigationView;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
-
 public class MainNavigationActivity extends AppCompatActivity implements MainNavigationContract{
 
     private DrawerLayout drawerLayout;
-    private boolean searchMapFragment = false;
+    private boolean searchMapFragment = true;
     private ActionBarDrawerToggle mDrawerToggle;
     private Toolbar toolbar;
+    private String[] suggestions;
     private MaterialSearchView searchView;
     private SessionManager session;
 
@@ -44,15 +46,13 @@ public class MainNavigationActivity extends AppCompatActivity implements MainNav
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_context);
 
-        toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
+        toolbar = findViewById(R.id.toolbar_general);
         setSupportActionBar(toolbar);
-
+        suggestions = new String[]{"Suggestion 1", "Suggestion 2"};
         drawerLayout = findViewById(R.id.drawer_layout);
 
         NavigationView navigationView = findViewById(R.id.navigation_view);
 
-        searchView = findViewById(R.id.search_view);
 
         if( navigationView != null ){
             setupDrawerContent(navigationView);
@@ -70,25 +70,32 @@ public class MainNavigationActivity extends AppCompatActivity implements MainNav
             mDrawerToggle.syncState();
         }
 
+
+        searchView = findViewById(R.id.search_view);
         setFragment(0);
     }
 
-
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        return false;
+        if (!searchMapFragment){
+            menu.findItem(R.id.action_search).setVisible(false);
+        }else if (searchMapFragment){
+            menu.findItem(R.id.action_search).setVisible(true);
+        }
+        return super.onPrepareOptionsMenu(menu);
     }
 
-
-
-        @Override
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.search_toolbar, menu);
         MenuItem item = menu.findItem(R.id.action_search);
         searchView.setMenuItem(item);
+
         return true;
     }
+
 
    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -108,10 +115,14 @@ public class MainNavigationActivity extends AppCompatActivity implements MainNav
                         switch (menuItem.getItemId()) {
                             case R.id.nav_map:
                                 menuItem.setChecked(true);
+                                searchMapFragment = true;
+                                invalidateOptionsMenu();
                                 setFragment(0);
                                 drawerLayout.closeDrawer(GravityCompat.START);
                                 return true;
                             case R.id.nav_profile:
+                                searchMapFragment = false;
+                                invalidateOptionsMenu();
                                 menuItem.setChecked(true);
                                 setFragment(1);
                                 drawerLayout.closeDrawer(GravityCompat.START);
@@ -134,21 +145,23 @@ public class MainNavigationActivity extends AppCompatActivity implements MainNav
 
         switch (position){
             case 0:
+
                 fragmentManager = getSupportFragmentManager();
                 fragmentTransaction = fragmentManager.beginTransaction();
                 MapsFragment mapsFragment = new MapsFragment();
                 fragmentTransaction.replace(R.id.main_content,mapsFragment);
                 fragmentTransaction.commit();
-                getSupportActionBar().setTitle("Mapa");
+//                getSupportActionBar().setTitle("Mapa");
                 break;
 
             case 1:
+
                 fragmentManager = getSupportFragmentManager();
                 fragmentTransaction = fragmentManager.beginTransaction();
                 ProfileFragment profileFragment = new ProfileFragment();
                 fragmentTransaction.replace(R.id.main_content,profileFragment);
                 fragmentTransaction.commit();
-                getSupportActionBar().setTitle("Perfil");
+//                getSupportActionBar().setTitle("Perfil");
                 break;
             case 2:
                 startLogOutActivity();
@@ -163,5 +176,9 @@ public class MainNavigationActivity extends AppCompatActivity implements MainNav
         Intent loginIntent = new Intent().setClass(MainNavigationActivity.this,LoginActivity.class);
         loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(loginIntent);
+    }
+
+    public void searchViewListener(){
+
     }
 }

@@ -108,6 +108,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,GoogleM
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
@@ -118,6 +119,8 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,GoogleM
         getLocationPermission();
         return v;
     }
+
+
 
     private void getDeviceLocation() {
         locationManager = (LocationManager)getActivity().getSystemService(Context.LOCATION_SERVICE);
