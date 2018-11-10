@@ -28,7 +28,7 @@
     <string name="register_dni">DNI</string>
     <string name="confirm_password">Confirmar contraseña</string>
 
-
+    //SEARCH ITEMS
     <string name="search">Buscar</string>
 
 
@@ -39,4 +39,18 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    //ENTERPRISE
+    <string name="enterprise_name">EMPRESA NOMBRE</string>
+    <string name="enterprise_branch">SUCURSAL</string>
+    <string name="enterprise_address">DIRECCION</string>
+    <string name="enterprise_service">SERVICIO</string>
+    <string name="enterprise_district">DISTRITO</string>
+    <string name="enterprise_rating">RATING</string>
+
+    //PROFILE
+    <string name="profile_email">Correo</string>
+    <string name="profile_address">Dirección</string>
+    <string name="profile_dni">Documento de identidad</string>
+    <string name="profile_scholar_grade">Grado Académico</string>
 </resources>
