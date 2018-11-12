@@ -32,7 +32,7 @@ public class SessionManager {
     private static final String KEY_TOKEN = "token";
 
     public void setKeyToken(String token){
-        editor.putString(KEY_TOKEN,"Bearer: "+token);
+        editor.putString(KEY_TOKEN,"Bearer "+token);
         editor.commit();
     }
 

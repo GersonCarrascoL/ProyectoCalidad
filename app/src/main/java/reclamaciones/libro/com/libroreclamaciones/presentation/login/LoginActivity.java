@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -120,8 +121,6 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         }
     }
 
-
-
     @Override
     public void showLoadingDialog() {
         mProgressDialog.show();
@@ -138,23 +137,34 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
 
     @Override
     public void showSuccessToast() {
-        Toast.makeText(context,context.getResources().getString(R.string.success),Toast.LENGTH_SHORT).show();
+        Snackbar.make(getWindow().getDecorView().getRootView(),context.getResources().getString(R.string.success),Snackbar.LENGTH_SHORT).show();
     }
 
     @Override
     public void showWrongCredentialsToast() {
-        Toast.makeText(context,context.getResources().getString(R.string.email_password_ws_error),Toast.LENGTH_SHORT).show();
+        Snackbar.make(getWindow().getDecorView().getRootView(),context.getResources().getString(R.string.email_password_ws_error),Snackbar.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showUserDeleteToast() {
+        Snackbar.make(getWindow().getDecorView().getRootView(),context.getResources().getString(R.string.user_deleted),Snackbar.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showUserVerifiedToast() {
+        Snackbar.make(getWindow().getDecorView().getRootView(),context.getResources().getString(R.string.user_not_verified),Snackbar.LENGTH_SHORT).show();
     }
 
     //Connection error
     @Override
     public void showConnectionError() {
-        Toast.makeText(context, context.getResources().getString(R.string.error_connect), Toast.LENGTH_SHORT).show();
+        Snackbar.make(getWindow().getDecorView().getRootView(), context.getResources().getString(R.string.error_connect), Snackbar.LENGTH_SHORT).show();
     }
 
-     /*
-     Intents
-     */
+
+    /*
+    Intents
+    */
     @Override
     public void launchHome() {
         launchActivityClearStack(this,MainNavigationActivity.class);
@@ -181,7 +191,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     */
 
     public void showCompleteLoginFormToast(){
-        Toast.makeText(getApplicationContext(),getResources().getString(R.string.cant_pass),Toast.LENGTH_SHORT).show();
+        Snackbar.make(getWindow().getDecorView().getRootView(),getResources().getString(R.string.cant_pass),Snackbar.LENGTH_SHORT).show();
     }
 
 

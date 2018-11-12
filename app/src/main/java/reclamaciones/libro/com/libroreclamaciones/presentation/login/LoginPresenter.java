@@ -18,7 +18,6 @@ public class LoginPresenter implements LoginContract.Presenter{
     private Context context;
     private LoginContract.View view;
     private SessionManager session;
-    private String TAG = LoginPresenter.class.getSimpleName();
 
     public LoginPresenter(Context context){
         this.context = context;
@@ -57,39 +56,52 @@ public class LoginPresenter implements LoginContract.Presenter{
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                if (response.isSuccessful()){
-                    if (response.body() != null){
-                        JsonObject jsonObject = response.body();
-                        Log.d("uooasdas", jsonObject.toString());
-                        int status = jsonObject.get("status").getAsInt();
 
-                        switch (status){
-                            case 1:
-                                String token = jsonObject.get("token").toString();
+                JsonObject jsonObject = response.body();
+                int status = response.code();
+                Log.d("ATTACHHED",""+response.code());
+                switch (status){
+                    case 200:
+                        String token = jsonObject.get("token").getAsString();
+                        Log.d("TOKEN: ",token);
+                        session.setKeyToken(token);
 
-                                session.setKeyToken(token);
+                        session.login();
+                        if (isAttached()){
 
-                                session.login();
-                                if (isAttached()){
-                                    Log.d("ATTACHHED","Se esta retornando la vista");
-                                    getView().hideLoadingDialog();
-                                    getView().showSuccessToast();
-                                    getView().launchHome();
-                                }
-                                break;
-                            case 2:
-                                if (isAttached()) {
-                                    getView().hideLoadingDialog();
-                                    getView().showWrongCredentialsToast();
-                                }
-                                break;
-                            case 3:
-                                break;
-                            case 4:
-                                break;
+                            getView().hideLoadingDialog();
+                            getView().showSuccessToast();
+                            getView().launchHome();
                         }
-                    }
+                        break;
+                    case 202:
+                        if (isAttached()) {
+                            getView().hideLoadingDialog();
+                            getView().showWrongCredentialsToast();
+                        }
+                        break;
+
+                    case 403:
+                        if (isAttached()) {
+                            getView().hideLoadingDialog();
+                            getView().showUserDeleteToast();
+                        }
+                        break;
+                    case 401:
+                        if (isAttached()) {
+                            getView().hideLoadingDialog();
+                            getView().showUserVerifiedToast();
+                        }
+                        break;
+                    case 500:
+                        if (isAttached()) {
+                            getView().hideLoadingDialog();
+                            getView().showConnectionError();
+                        }
+                        break;
                 }
+
+
             }
 
             @Override

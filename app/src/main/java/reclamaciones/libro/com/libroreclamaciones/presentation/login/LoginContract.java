@@ -14,6 +14,8 @@ public class LoginContract {
         void hideLoadingDialog();
         void showWrongCredentialsToast();
         void showConnectionError();
+        void showUserDeleteToast();
+        void showUserVerifiedToast();
         void launchHome();
         void launchSignUp();
     }

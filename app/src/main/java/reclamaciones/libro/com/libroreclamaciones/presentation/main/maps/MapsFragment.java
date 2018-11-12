@@ -189,7 +189,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,GoogleM
     }
 
     private void moveCamera(LatLng latLng, float zoom){
-//        Log.d(TAG, "moveCamera: moving the camera to: lat: " + latLng.latitude + ", lng: " + latLng.longitude );
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
     }
 
