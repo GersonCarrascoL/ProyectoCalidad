@@ -25,6 +25,7 @@
             android:textSize="24sp" />
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/label_register_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:errorEnabled="true">
@@ -37,7 +38,8 @@
                 android:layout_marginBottom="20dp"
                 android:hint="Email"
                 android:inputType="textEmailAddress"
-                android:paddingBottom="10dp" />
+                android:paddingBottom="10dp"
+                android:maxLines="1" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

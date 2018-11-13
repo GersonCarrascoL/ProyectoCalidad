@@ -23,10 +23,17 @@
     <string name="success">Acceso correcto</string>
     <string name="error_connect">No se puede conectar</string>
     <string name="email_password_ws_error">Usuario y/o Contraseña incorrecto</string>
+    <string name="user_deleted">Usuario eliminado, comuniquese con soporte</string>
+    <string name="user_not_verified">El usuario no ha sido verificado</string>
 
     //REGISTER STRINGS
     <string name="register_dni">DNI</string>
     <string name="confirm_password">Confirmar contraseña</string>
+    <string name="error_name">Nombre requerido</string>
+    <string name="error_last_name">Apellidos requerido</string>
+    <string name="required">Requerido</string>
+    <string name="password_different">Contraseñas no coinciden</string>
+    <string name="validate_form">Tiene campos sin completar</string>
 
     //SEARCH ITEMS
     <string name="search">Buscar</string>
@@ -49,8 +56,11 @@
     <string name="enterprise_rating">RATING</string>
 
     //PROFILE
+    <string name="profile_name">Nombre</string>
+    <string name="profile_ocupation">Ocupación</string>
     <string name="profile_email">Correo</string>
-    <string name="profile_address">Dirección</string>
+    <string name="profile_district">Distrito</string>
     <string name="profile_dni">Documento de identidad</string>
     <string name="profile_scholar_grade">Grado Académico</string>
+    <string name="profile_sex">Sexo</string>
 </resources>
