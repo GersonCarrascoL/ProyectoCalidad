@@ -199,7 +199,7 @@
                         android:id="@+id/profile_scholar_grade"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="47260662"
+                        android:text="Bachiller"
                         android:textColor="@color/secondaryTextColor"
                         android:textSize="16dp" />
 
