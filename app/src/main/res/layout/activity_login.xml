@@ -66,7 +66,10 @@
                     android:id="@+id/label_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:errorEnabled="true">
+                    app:errorEnabled="true"
+                    app:passwordToggleDrawable="@drawable/toogle_pass"
+                    app:passwordToggleEnabled="true"
+                    app:passwordToggleTint="@color/secondaryColor">
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/login_password"
                         style="@style/ThemeOverlay.MaterialComponents.TextInputEditText"

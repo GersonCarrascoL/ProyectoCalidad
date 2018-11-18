@@ -34,6 +34,8 @@
     <string name="required">Requerido</string>
     <string name="password_different">Contraseñas no coinciden</string>
     <string name="validate_form">Tiene campos sin completar</string>
+    <string name="label_sex">Sexo</string>
+    <string name="created_error">Ha ocurrido un error</string>
 
     //SEARCH ITEMS
     <string name="search">Buscar</string>
@@ -63,4 +65,10 @@
     <string name="profile_dni">Documento de identidad</string>
     <string name="profile_scholar_grade">Grado Académico</string>
     <string name="profile_sex">Sexo</string>
+
+    //CLAIMS
+    <string name="pick_photo">ESCOGER FOTO</string>
+    <string name="send_claim">ENVIAR_RECLAMO</string>
+    <string name="claim_message">Mensaje</string>
+    <string name="claim_cellphone">Teléfono o celular</string>
 </resources>

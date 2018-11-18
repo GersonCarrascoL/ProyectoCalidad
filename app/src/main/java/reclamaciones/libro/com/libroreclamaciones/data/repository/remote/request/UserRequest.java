@@ -3,13 +3,20 @@ package reclamaciones.libro.com.libroreclamaciones.data.repository.remote.reques
 
 import com.google.gson.JsonObject;
 
+import java.util.Map;
+
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import reclamaciones.libro.com.libroreclamaciones.data.model.User;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
+import retrofit2.http.PartMap;
 
 public interface UserRequest {
 
@@ -22,4 +29,36 @@ public interface UserRequest {
     //Profile
     @GET("users")
     Call<User> getProfile(@Header("Authorization") String token);
+
+    //Register
+    @FormUrlEncoded
+    @POST("users/signup")
+    Call<JsonObject> register(@Field("userName") String name,
+                              @Field("userLastName") String last_name,
+                              @Field("userEmail") String email,
+                              @Field("userID") String userName,
+                              @Field("userPassword") String password,
+                              @Field("userDNI") String dni,
+                              @Field("userGender") String gender,
+                              @Field("userDistrict") int district,
+                              @Field("userOcupation") String ocupation,
+                              @Field("userScholarGrade") String grade_level);
+
+    //Claim
+    @Multipart
+    @POST("users/claims")
+    Call<JsonObject> registerClaim(@Part MultipartBody.Part image,
+                                   @Part("claimMessage") RequestBody message,
+                                   @Part("claimCellPhone") RequestBody cellphone,
+                                   @Part("userName") RequestBody name,
+                                   @Part("userLastName") RequestBody last_name,
+                                   @Part("userEmail") RequestBody email,
+                                   @Part("userID") RequestBody userName,
+                                   @Part("userPassword") RequestBody password,
+                                   @Part("userDNI") RequestBody dni,
+                                   @Part("userGender") RequestBody gender,
+                                   @Part("userDistrict") RequestBody district,
+                                   @Part("userOcupation") RequestBody ocupation,
+                                   @Part("userScholarGrade") RequestBody grade_level);
+//    Call<JsonObject> registerClaim(@PartMap Map<String,RequestBody> params);
 }

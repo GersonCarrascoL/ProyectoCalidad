@@ -16,6 +16,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.google.android.material.button.MaterialButton;
@@ -35,6 +36,8 @@ public class RegisterActivity2 extends AppCompatActivity implements RegisterCont
     TextInputLayout label_register_email;
     @BindView(R.id.register_email)
     TextInputEditText register_email;
+    @BindView(R.id.gender_options)
+    RadioGroup gender_options;
     @BindView(R.id.spinner_district)
     MaterialSpinner spinner_district;
     @BindView(R.id.spinner_ocupation)
@@ -49,6 +52,7 @@ public class RegisterActivity2 extends AppCompatActivity implements RegisterCont
     private String register_last_name;
     private String register_ocupation;
     private String register_scholar_grade;
+    private String register_gender;
     private int register_district;
     private Map<Integer, String> map;
     private boolean flag;
@@ -60,10 +64,25 @@ public class RegisterActivity2 extends AppCompatActivity implements RegisterCont
 
         ButterKnife.bind(this);
         Intent intent = getIntent();
+        register_gender = "M";
         register_name = intent.getStringExtra("register_name");
         register_last_name = intent.getStringExtra("register_last_name");
         Log.d("Registro Nomnbre",""+register_name);
         Log.d("Registro Nomnbre",""+register_last_name);
+
+        gender_options.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId){
+                    case R.id.gender_female:
+                        register_gender = "F";
+                        break;
+                    case R.id.gender_male:
+                        register_gender = "M";
+                        break;
+                }
+            }
+        });
 
         map = new HashMap<Integer, String>();
         map.put(0, "Distrito");
@@ -260,12 +279,14 @@ public class RegisterActivity2 extends AppCompatActivity implements RegisterCont
     public void launchNextLayout() {
         Intent intent = new Intent(getApplicationContext(), RegisterActivity3.class);
 
+        Log.d("genero",register_gender+"");
         intent.putExtra("register_name", ""+register_name);
         intent.putExtra("register_last_name", ""+register_last_name);
         intent.putExtra("register_email", ""+register_email.getText());
         intent.putExtra("spinner_ocupation",""+register_ocupation);
         intent.putExtra("spinner_grade_level",""+register_scholar_grade);
         intent.putExtra("spinner_district",""+register_district);
+        intent.putExtra("register_gender",""+register_gender);
 
         startActivity(intent);
     }

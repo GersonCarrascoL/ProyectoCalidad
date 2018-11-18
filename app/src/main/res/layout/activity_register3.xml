@@ -27,6 +27,7 @@
             android:id="@+id/label_register_dni"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -34,7 +35,6 @@
                 style="@style/ThemeOverlay.MaterialComponents.TextInputEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
                 android:gravity="center_vertical"
                 android:hint="@string/register_dni"
                 android:inputType="number"
@@ -47,7 +47,11 @@
             android:id="@+id/label_register_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:errorEnabled="true">
+            app:errorEnabled="true"
+            android:layout_marginBottom="20dp"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleDrawable="@drawable/toogle_pass"
+            app:passwordToggleTint="@color/secondaryColor">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/register_password"
@@ -56,15 +60,18 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/login_password"
                 android:inputType="textPassword"
-                android:paddingBottom="10dp"
-                android:layout_marginBottom="20dp"/>
+                android:paddingBottom="10dp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/label_register_confirmation_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:errorEnabled="true">
+            android:layout_marginBottom="20dp"
+            app:errorEnabled="true"
+            app:passwordToggleDrawable="@drawable/toogle_pass"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="@color/secondaryColor">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/register_confirm_password"
@@ -73,8 +80,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/confirm_password"
                 android:inputType="textPassword"
-                android:paddingBottom="10dp"
-                android:layout_marginBottom="20dp"/>
+                android:paddingBottom="10dp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

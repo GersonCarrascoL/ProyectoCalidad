@@ -20,7 +20,6 @@ import com.google.android.material.textfield.TextInputLayout;
 
 public class RegisterActivity extends AppCompatActivity implements RegisterContract.View{
 
-    private Toolbar toolbar;
     @BindView(R.id.label_register_name)
     TextInputLayout label_register_name;
     @BindView(R.id.register_name)

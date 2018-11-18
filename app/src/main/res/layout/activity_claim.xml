@@ -4,73 +4,73 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingStart="30dp"
+    android:paddingEnd="30dp"
     android:orientation="vertical"
-    tools:context=".presentation.register.view_one.RegisterActivity">
-
-    <!-- CONTINUA LA VISTA -->
+    tools:context=".presentation.claim.ClaimActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingLeft="20dp"
-        android:gravity="center"
-        android:paddingRight="20dp">
+        android:gravity="center">
 
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="match_parent"
-            android:layout_height="69dp"
-            android:text="¿Cómo te llamas?"
-            android:textAlignment="center"
-            android:textSize="24sp" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/label_register_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            app:errorEnabled="true">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/register_name"
-                style="@style/ThemeOverlay.MaterialComponents.TextInputEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Nombre"
-                android:maxLines="1"
-                android:inputType="text"/>
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/label_register_last_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            app:errorEnabled="true">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/register_last_name"
-                style="@style/ThemeOverlay.MaterialComponents.TextInputEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Apellido"
-                android:maxLines="1"
-                android:inputType="text"/>
-
-        </com.google.android.material.textfield.TextInputLayout>
-
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/photo_gallery"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_next"
+            android:id="@+id/pick_photo"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:text="@string/pick_photo"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/label_claim_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            app:errorEnabled="true"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/claim_message"
+                style="@style/ThemeOverlay.MaterialComponents.TextInputEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/claim_message"
+                android:inputType="text"
+                android:maxLines="2"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/label_claim_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            app:errorEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/claim_phone"
+                style="@style/ThemeOverlay.MaterialComponents.TextInputEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/claim_cellphone"
+                android:inputType="number"
+                android:maxLines="1"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/send_claim"
             style="@style/Widget.MaterialComponents.Button"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginBottom="15dp"
-            android:text="Siguiente"
-            app:cornerRadius="0dp" />
+            android:layout_height="wrap_content"
+            android:text="@string/send_claim"/>
 
     </LinearLayout>
 

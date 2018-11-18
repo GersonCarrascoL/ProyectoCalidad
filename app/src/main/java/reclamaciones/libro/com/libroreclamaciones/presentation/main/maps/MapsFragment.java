@@ -1,6 +1,7 @@
 package reclamaciones.libro.com.libroreclamaciones.presentation.main.maps;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -28,16 +29,88 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.snackbar.Snackbar;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import reclamaciones.libro.com.libroreclamaciones.data.model.InfoWindow;
+import reclamaciones.libro.com.libroreclamaciones.data.model.BranchOffice;
+import reclamaciones.libro.com.libroreclamaciones.data.model.BranchOfficeList;
 import reclamaciones.libro.com.libroreclamaciones.utils.CustomInfoWindowGoogleMap;
 import reclamaciones.libro.com.libroreclamaciones.presentation.enterprise.EnterpriseActivity;
 import reclamaciones.libro.com.libroreclamaciones.R;
 
 
-public class MapsFragment extends Fragment implements OnMapReadyCallback,GoogleMap.OnMarkerClickListener{
+public class MapsFragment extends Fragment implements OnMapReadyCallback,GoogleMap.OnMarkerClickListener,MapsContract.View {
+    private static final String TAG = "MapActivity";
+
+    private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
+    private static final String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
+    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
+    private static final float ZOOM_CAMERA = 12f;
+
+    //vars
+    private Boolean mLocationPermissionsGranted = false;
+    private GoogleMap mMap;
+    private LocationManager locationManager;
+    private LocationListener locationListener;
+    private ProgressDialog mProgressDialog;
+    private MapsPresenter presenter;
+    private Context context;
+    private Location location_present;
+    private Map<String,LatLng> mapMarkers;
+    private Map<String,LatLng> markersService;
+
+    private boolean firstChargeView;
+
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        this.context = getContext();
+
+        if (presenter == null){
+            presenter = new MapsPresenter(context);
+        }
+
+        mapMarkers = new HashMap<>();
+        firstChargeView = true;
+
+        getLocationPermission();
+
+        mProgressDialog = new ProgressDialog(context,R.style.MyProgressDialogTheme);
+        mProgressDialog.setMessage(getText(R.string.default_loading_text));
+        mProgressDialog.setCancelable(false);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        View v =  inflater.inflate(R.layout.fragment_maps, container, false);
+
+        return v;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getPresenter().onViewAttach(MapsFragment.this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        getPresenter().onViewDettach();
+    }
+
+    public MapsContract.Presenter getPresenter(){
+        return presenter;
+    }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -51,75 +124,16 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,GoogleM
                     Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 return;
             }
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0,locationListener);
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,10000,0,locationListener);
             mMap.setMyLocationEnabled(true);
             mMap.getUiSettings().setMyLocationButtonEnabled(true);
         }
 
-        // CREAR MARKER OPTIONS
-        MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions
-                .position(new LatLng(-11.9757177,-76.9941974))
-                .title("Cerca de mi casa")
-                .snippet("Muy cerca")
-                .icon((BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
-
-        // SE CREA LA CLASE QUE RECIBE TODA LA INFO PARA EL INFO WINDOW
-        InfoWindow infoWindow = new InfoWindow();
-        infoWindow.setEnterprise_name("Empresa 1");
-        infoWindow.setEnterprise_direction("Av San Martin cdra 65 Jr Santuario");
-
-        //SE SETEA EL CREADOR DEL INFO WINDOW
-        CustomInfoWindowGoogleMap customInfoWindowGoogleMap = new CustomInfoWindowGoogleMap(getActivity());
-        mMap.setInfoWindowAdapter(customInfoWindowGoogleMap);
-
-        // SE AGREGA EL MARCADOR Y SE SETEA EL INFO WINDOW AL MARKER
-        Marker m = mMap.addMarker(markerOptions);
-        m.setTag(infoWindow);
-        m.showInfoWindow();
-
-        //CUANDO CLICKEAS EN EL INFO WINDOW ABRE OTRO LISTENER
-        googleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
-            @Override
-            public void onInfoWindowClick(Marker marker) {
-                Intent intent = new Intent(getActivity(),EnterpriseActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 
     public MapsFragment() {
         // Required empty public constructor
     }
-
-    private static final String TAG = "MapActivity";
-
-    private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
-    private static final String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
-    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
-    private static final float ZOOM_CAMERA = 15f;
-
-    //vars
-    private Boolean mLocationPermissionsGranted = false;
-    private GoogleMap mMap;
-    private LocationManager locationManager;
-    private LocationListener locationListener;
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
-        View v =  inflater.inflate(R.layout.fragment_maps, container, false);
-        getLocationPermission();
-        return v;
-    }
-
 
 
     private void getDeviceLocation() {
@@ -129,7 +143,15 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,GoogleM
             locationListener = new LocationListener() {
                 @Override
                 public void onLocationChanged(Location location) {
-                    moveCamera(new LatLng(location.getLatitude(),location.getLongitude()),ZOOM_CAMERA);
+                    location_present = location;
+                    double latitude = -12.0550758;
+                    double longitude = -77.0384442;
+                    mMap.clear();
+                    LatLng prueba = new LatLng(latitude,longitude);
+//                    moveCamera(new LatLng(location.getLatitude(),location.getLongitude()),ZOOM_CAMERA);
+                    moveCamera(prueba,ZOOM_CAMERA);
+                    getPresenter().getBranchOffice(prueba);
+//                    getPresenter().getBranchOffice(new LatLng(location.getLatitude(),location.getLongitude()));
                 }
 
                 @Override
@@ -215,11 +237,100 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,GoogleM
         }
     }
 
+    @Override
+    public void setBranchOffice(BranchOfficeList branchOfficeList){
+        final List<BranchOffice> branchOffices =  branchOfficeList.getSucursalesCercanas();
+        int sizeBranchOffice = branchOfficeList.getSucursalesCercanas().size();
+
+        if (firstChargeView){
+            Log.d("Primera carga:","Si");
+            for (int i = 0; i< sizeBranchOffice; i++) {
+
+                final int i_value = i;
+
+                CustomInfoWindowGoogleMap customInfoWindowGoogleMap = new CustomInfoWindowGoogleMap(getActivity());
+                mMap.setInfoWindowAdapter(customInfoWindowGoogleMap);
+
+                String snippet = "Distrito: " + branchOffices.get(i).getNombreDistrito() + "\n" +
+                        "Direccion: " + branchOffices.get(i).getDireccion();
+
+                LatLng positionMarker = new LatLng(branchOffices.get(i).getLatitud(), branchOffices.get(i).getLongitud());
+
+                MarkerOptions markerOptions = new MarkerOptions();
+                markerOptions
+                        .position(positionMarker)
+                        .title(branchOffices.get(i).getNombreEmpresa())
+                        .snippet(snippet)
+                        .icon((BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+
+                Marker m = mMap.addMarker(markerOptions);
+
+                mapMarkers.put(m.getId(),positionMarker);
+
+                mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                    @Override
+                    public void onInfoWindowClick(Marker marker) {
+                        Intent intent = new Intent(getActivity(), EnterpriseActivity.class);
+                        intent.putExtra("idSucursal",""+branchOffices.get(i_value).getIdSucursal());
+                        startActivity(intent);
+                    }
+                });
+
+                firstChargeView = false;
+            }
+        }else{
+
+            for (int i = 0; i< sizeBranchOffice; i++) {
+                Log.d("Primera carga:","No");
+                final int i_value = i;
+
+                CustomInfoWindowGoogleMap customInfoWindowGoogleMap = new CustomInfoWindowGoogleMap(getActivity());
+                mMap.setInfoWindowAdapter(customInfoWindowGoogleMap);
+
+                String snippet = "Distrito: " + branchOffices.get(i).getNombreDistrito() + "\n" +
+                        "Direccion: " + branchOffices.get(i).getDireccion();
+
+                LatLng positionMarker = new LatLng(branchOffices.get(i).getLatitud(), branchOffices.get(i).getLongitud());
+
+                MarkerOptions markerOptions = new MarkerOptions();
+                markerOptions
+                        .position(positionMarker)
+                        .title(branchOffices.get(i).getNombreEmpresa())
+                        .snippet(snippet)
+                        .icon((BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+
+                Marker m = mMap.addMarker(markerOptions);
+
+                mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                    @Override
+                    public void onInfoWindowClick(Marker marker) {
+                        Intent intent = new Intent(getActivity(), EnterpriseActivity.class);
+                        intent.putExtra("idSucursal",""+branchOffices.get(i_value).getIdSucursal());
+                        startActivity(intent);
+                    }
+                });
+            }
+        }
+    }
+
+    @Override
+    public void showLoadingDialog() {
+        mProgressDialog.show();
+    }
+
+    @Override
+    public void hideLoadingDialog() {
+        mProgressDialog.hide();
+    }
+
+    @Override
+    public void showConnectionError() {
+        Snackbar.make(getView(),getResources().getString(R.string.error_connect),Snackbar.LENGTH_LONG).show();
+    }
 
     @Override
     public boolean onMarkerClick(Marker marker) {
-        Intent intent = new Intent(getActivity(),EnterpriseActivity.class);
-        startActivity(intent);
+        marker.showInfoWindow();
         return true;
     }
 
