@@ -151,7 +151,6 @@ public class ClaimActivity extends AppCompatActivity implements ClaimContract.Vi
                 byte[] b = baos.toByteArray();
 
                 encodedImage = Base64.encodeToString(b,Base64.DEFAULT);
-                Log.d("Imagen en base 64 ",""+encodedImage);
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -185,7 +184,7 @@ public class ClaimActivity extends AppCompatActivity implements ClaimContract.Vi
         validatePhone();
 
         if (flag){
-            getPresenter().register(fileImage,claim_message.getText().toString(),claim_phone.getText().toString(),register_name,register_last_name,register_email,register_gender,Integer.parseInt(register_district),register_ocupation,register_grade_level,register_dni,register_password);
+            getPresenter().register(encodedImage,claim_message.getText().toString(),claim_phone.getText().toString(),register_name,register_last_name,register_email,register_gender,Integer.parseInt(register_district),register_ocupation,register_grade_level,register_dni,register_password);
         }else{
             Snackbar.make(getWindow().getDecorView().getRootView(),"Tiene campos sin completar",Snackbar.LENGTH_LONG).show();
         }

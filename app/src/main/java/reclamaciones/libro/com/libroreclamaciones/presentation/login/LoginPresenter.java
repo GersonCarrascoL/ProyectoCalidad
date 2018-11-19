@@ -63,7 +63,11 @@ public class LoginPresenter implements LoginContract.Presenter{
                 switch (status){
                     case 200:
                         String token = jsonObject.get("token").getAsString();
+                        int idUser = jsonObject.get("idUsuario").getAsInt();
                         Log.d("TOKEN: ",token);
+                        Log.d("IDUSUARIO: ",idUser+"");
+
+                        session.setIdUser(idUser);
                         session.setKeyToken(token);
 
                         session.login();

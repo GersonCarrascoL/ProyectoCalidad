@@ -5,10 +5,8 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 import reclamaciones.libro.com.libroreclamaciones.data.model.Sucursal;
-import reclamaciones.libro.com.libroreclamaciones.data.model.User;
 import reclamaciones.libro.com.libroreclamaciones.data.repository.remote.ServiceGenerator;
 import reclamaciones.libro.com.libroreclamaciones.data.repository.remote.request.EnterpriseRequest;
-import reclamaciones.libro.com.libroreclamaciones.data.repository.remote.request.UserRequest;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -19,6 +17,7 @@ public class EnterprisePresenter implements EnterpriseContract.Presenter{
 
     public EnterprisePresenter(Context context){
         this.context = context;
+
     }
 
     @Override
@@ -41,26 +40,25 @@ public class EnterprisePresenter implements EnterpriseContract.Presenter{
     }
 
     @Override
-    public void getSucursal(int idSucursal) {
+    public void getSucursal(int idSucursal,int idUser) {
         if (isAttached()){
             getView().showLoadingDialog();
         }
 
         EnterpriseRequest enterpriseRequest = ServiceGenerator.createServicePython(EnterpriseRequest.class);
 
-        Call<Sucursal> call = enterpriseRequest.getSucursal(idSucursal);
+        Call<Sucursal> call = enterpriseRequest.getSucursal(idSucursal,idUser);
 
         call.enqueue(new Callback<Sucursal>() {
             @Override
             public void onResponse(Call<Sucursal> call, Response<Sucursal> response) {
 
                 int status = response.code();
-
+                Log.d("Response status",status+"");
                 if (response.isSuccessful()){
                     Sucursal sucursal = response.body();
                     switch (status){
                         case 200:
-
                             if (isAttached()){
                                 getView().setInfo(sucursal);
                             }

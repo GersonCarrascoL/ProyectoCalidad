@@ -68,7 +68,8 @@
 
     //CLAIMS
     <string name="pick_photo">ESCOGER FOTO</string>
-    <string name="send_claim">ENVIAR_RECLAMO</string>
+    <string name="send_claim">ENVIAR RECLAMO</string>
     <string name="claim_message">Mensaje</string>
     <string name="claim_cellphone">Teléfono o celular</string>
+    <string name="claim_title">Por favor insertar imagen de su DNI</string>
 </resources>

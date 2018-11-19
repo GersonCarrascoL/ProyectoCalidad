@@ -15,6 +15,9 @@ public class Sucursal {
     @SerializedName("direccion")
     @Expose
     private String direccion;
+    @SerializedName("comentario_usuario")
+    @Expose
+    private List<ComentarioUsuario> comentarioUsuario = null;
     @SerializedName("comentarios")
     @Expose
     private List<Comentario> comentarios = null;
@@ -41,6 +44,14 @@ public class Sucursal {
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
+    }
+
+    public List<ComentarioUsuario> getComentarioUsuario() {
+        return comentarioUsuario;
+    }
+
+    public void setComentarioUsuario(List<ComentarioUsuario> comentarioUsuario) {
+        this.comentarioUsuario = comentarioUsuario;
     }
 
     public List<Comentario> getComentarios() {

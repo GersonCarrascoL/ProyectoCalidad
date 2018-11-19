@@ -45,20 +45,20 @@ public interface UserRequest {
                               @Field("userScholarGrade") String grade_level);
 
     //Claim
-    @Multipart
+    @FormUrlEncoded
     @POST("users/claims")
-    Call<JsonObject> registerClaim(@Part MultipartBody.Part image,
-                                   @Part("claimMessage") RequestBody message,
-                                   @Part("claimCellPhone") RequestBody cellphone,
-                                   @Part("userName") RequestBody name,
-                                   @Part("userLastName") RequestBody last_name,
-                                   @Part("userEmail") RequestBody email,
-                                   @Part("userID") RequestBody userName,
-                                   @Part("userPassword") RequestBody password,
-                                   @Part("userDNI") RequestBody dni,
-                                   @Part("userGender") RequestBody gender,
-                                   @Part("userDistrict") RequestBody district,
-                                   @Part("userOcupation") RequestBody ocupation,
-                                   @Part("userScholarGrade") RequestBody grade_level);
-//    Call<JsonObject> registerClaim(@PartMap Map<String,RequestBody> params);
+    Call<JsonObject> registerClaim(@Field("userName") String name,
+                                   @Field("userLastName") String last_name,
+                                   @Field("userEmail") String email,
+                                   @Field("userID") String userName,
+                                   @Field("userPassword") String password,
+                                   @Field("userDNI") String dni,
+                                   @Field("userGender") String gender,
+                                   @Field("userDistrict") int district,
+                                   @Field("userOcupation") String ocupation,
+                                   @Field("userScholarGrade") String gradeLevel,
+                                   @Field("claimMessage") String claimMessage,
+                                   @Field("claimCellPhone") String claimCellPhone,
+                                   @Field("claimPhoto") String claimPhoto );
+
 }

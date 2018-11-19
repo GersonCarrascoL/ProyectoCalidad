@@ -30,6 +30,7 @@ public class SessionManager {
     // SESSION
     private static final String KEY_SESSION = "session";
     private static final String KEY_TOKEN = "token";
+    private static final String KEY_ID_USER = "iduser";
 
     public void setKeyToken(String token){
         editor.putString(KEY_TOKEN,"Bearer "+token);
@@ -49,6 +50,15 @@ public class SessionManager {
         editor.clear();
         editor.putBoolean(KEY_SESSION,false);
         editor.commit();
+    }
+
+    public void setIdUser(int idUser){
+        editor.putInt(KEY_ID_USER,idUser);
+        editor.commit();
+    }
+
+    public int getIdUser(){
+        return preferences.getInt(KEY_ID_USER,0);
     }
 
     public boolean isActive(){

@@ -51,50 +51,14 @@ public class ClaimPresenter implements ClaimContract.Presenter{
     }
 
     @Override
-    public void register(File fileImage, String message, String cellphone, String name, String last_name, String email, String gender, int district, String ocupation, String grade_level, String dni, String password) {
+    public void register(String imageBase64, String message, String cellphone, String name, String last_name, String email, String gender, int district, String ocupation, String grade_level, String dni, String password) {
         if (isAttached()){
             getView().showLoadingDialog();
         }
 
-        File file = new File(fileImage.toURI());
-
-        RequestBody requestFile = RequestBody.create(MediaType.parse("image/*"),file);
-
-//        Map<String,RequestBody> map = new HashMap<>();
-//
-//        map.put("claimPhoto","file\"; filename=\"pp.png\"",requestFile);
-//        map.put("claimMessage",toRequestBody(message+""));
-//        map.put("claimCellPhone",toRequestBody(cellphone+""));
-//        map.put("userName",toRequestBody(name+""));
-//        map.put("userLastName",toRequestBody(last_name+""));
-//        map.put("userEmail",toRequestBody(email+""));
-//        map.put("userID",toRequestBody(name+"."+last_name));
-//        map.put("userPassword",toRequestBody(password+""));
-//        map.put("userDNI",toRequestBody(dni+""));
-//        map.put("userGender",toRequestBody(gender+""));
-//        map.put("userDistrict",toRequestBody(district+""));
-//        map.put("userOcupation",toRequestBody(ocupation+""));
-//        map.put("userScholarGrade",toRequestBody(grade_level+""));
-
-
-        MultipartBody.Part bodyImage = MultipartBody.Part.createFormData("claimPhoto",file.getName(),requestFile);
-        RequestBody v_message = RequestBody.create(MediaType.parse("text/plain"), message+"");
-        RequestBody v_cellphone = RequestBody.create(MediaType.parse("text/plain"), cellphone+"");
-        RequestBody v_name = RequestBody.create(MediaType.parse("text/plain"), name+"");
-        RequestBody v_lastname = RequestBody.create(MediaType.parse("text/plain"), last_name+"");
-        RequestBody v_username = RequestBody.create(MediaType.parse("text/plain"), v_name+"."+v_lastname+"");
-        RequestBody v_email = RequestBody.create(MediaType.parse("text/plain"), email+"");
-        RequestBody v_gender = RequestBody.create(MediaType.parse("text/plain"), gender+"");
-        RequestBody v_district = RequestBody.create(MediaType.parse("text/plain"), district+"");
-        RequestBody v_ocupation = RequestBody.create(MediaType.parse("text/plain"), ocupation+"");
-        RequestBody v_grade_level = RequestBody.create(MediaType.parse("text/plain"), grade_level+"");
-        RequestBody v_dni = RequestBody.create(MediaType.parse("text/plain"), dni+"");
-        RequestBody v_password = RequestBody.create(MediaType.parse("text/plain"), password+"");
-
-
         UserRequest userRequest = ServiceGenerator.createService(UserRequest.class);
 
-        Call<JsonObject> call = userRequest.registerClaim(bodyImage,v_message,v_cellphone,v_name,v_lastname,v_email,v_username,v_password,v_dni,v_gender,v_district,v_ocupation,v_grade_level);
+        Call<JsonObject> call = userRequest.registerClaim(name+"",last_name+"",email+"",name+"."+last_name,password+"",dni+"",gender+"",district,ocupation+"",grade_level+"",message+"",cellphone+"",imageBase64+"");
 
         call.enqueue(new Callback<JsonObject>() {
             @Override
@@ -116,6 +80,11 @@ public class ClaimPresenter implements ClaimContract.Presenter{
                             getView().showSnackBarErrorCreated();
                         }
                         break;
+                    case 500:
+                        if (isAttached()){
+                            getView().hideLoadingDialog();
+                            getView().showConnectionError();
+                        }
                 }
             }
 
@@ -125,10 +94,5 @@ public class ClaimPresenter implements ClaimContract.Presenter{
                 getView().showConnectionError();
             }
         });
-    }
-
-    public static RequestBody toRequestBody (String value) {
-        RequestBody body = RequestBody.create(MediaType.parse("text/plain"), value);
-        return body ;
     }
 }

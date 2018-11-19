@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import reclamaciones.libro.com.libroreclamaciones.R;
 import reclamaciones.libro.com.libroreclamaciones.data.model.Sucursal;
+import reclamaciones.libro.com.libroreclamaciones.data.repository.local.SessionManager;
 import reclamaciones.libro.com.libroreclamaciones.presentation.main.profile.ProfilePresenter;
 
 import android.app.ProgressDialog;
@@ -26,6 +27,7 @@ public class EnterpriseActivity extends AppCompatActivity implements EnterpriseC
 
     private String idSucursal;
     private EnterprisePresenter presenter;
+    private SessionManager session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,16 +40,16 @@ public class EnterpriseActivity extends AppCompatActivity implements EnterpriseC
 
         context = this;
 
+        session = SessionManager.getInstance(context);
+        int idUser = session.getIdUser();
+
         Intent intent = getIntent();
         idSucursal = intent.getStringExtra("idSucursal");
-
-        Log.d("Empresa idSucursal:",""+idSucursal);
 
         toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setTitle("EMPRESA");
-
 
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
@@ -64,7 +66,7 @@ public class EnterpriseActivity extends AppCompatActivity implements EnterpriseC
         mProgressDialog.setMessage(getText(R.string.default_loading_text));
         mProgressDialog.setCancelable(false);
 
-        getPresenter().getSucursal(Integer.parseInt(idSucursal));
+        getPresenter().getSucursal(Integer.parseInt(idSucursal),idUser);
     }
 
     @Override
@@ -91,6 +93,11 @@ public class EnterpriseActivity extends AppCompatActivity implements EnterpriseC
     @Override
     public void showLoadingDialog() {
         mProgressDialog.show();
+    }
+
+    @Override
+    public void hideLoadingDialog() {
+        mProgressDialog.hide();
     }
 
     @Override

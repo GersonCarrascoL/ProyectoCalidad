@@ -15,6 +15,12 @@
         android:orientation="vertical"
         android:gravity="center">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/claim_title"
+            android:layout_marginBottom="20dp"
+            />
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/photo_gallery"
             android:layout_width="250dp"

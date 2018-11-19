@@ -2,11 +2,14 @@ package reclamaciones.libro.com.libroreclamaciones.data.repository.remote.reques
 
 import reclamaciones.libro.com.libroreclamaciones.data.model.Sucursal;
 import retrofit2.Call;
-import retrofit2.http.GET;
-import retrofit2.http.Path;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.POST;
 
 public interface EnterpriseRequest {
 
-    @GET("detalles-sucursal/{id}")
-    Call<Sucursal> getSucursal(@Path("id") int idSucursal);
+    @FormUrlEncoded
+    @POST("detalles-sucursal")
+    Call<Sucursal> getSucursal(@Field("idSucursal") int idSucursal,
+                               @Field("idUsuario") int idUsuario);
 }
