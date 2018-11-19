@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import androidx.fragment.app.Fragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -124,7 +126,7 @@ public class ProfileFragment extends Fragment implements ProfileContract.View{
 
     @Override
     public void showConnectionError() {
-        Toast.makeText(context, context.getResources().getString(R.string.error_connect), Toast.LENGTH_SHORT).show();
+        Snackbar.make(getView(),getResources().getString(R.string.error_connect),Snackbar.LENGTH_LONG);
     }
 
 }
