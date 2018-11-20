@@ -56,6 +56,10 @@
     <string name="enterprise_service">SERVICIO</string>
     <string name="enterprise_district">DISTRITO</string>
     <string name="enterprise_rating">RATING</string>
+    <string name="enterprise_message">MENSAJE</string>
+    <string name="enterprise_comment">Escribir comentario</string>
+    <string name="card_date">00/00/00</string>
+    <string name="enterprise_send_message_error">No ha escrito ningún mensaje</string>
 
     //PROFILE
     <string name="profile_name">Nombre</string>

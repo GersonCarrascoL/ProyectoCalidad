@@ -3,6 +3,8 @@ package reclamaciones.libro.com.libroreclamaciones.presentation.enterprise;
 import android.content.Context;
 import android.util.Log;
 
+import com.google.gson.JsonObject;
+
 import androidx.annotation.Nullable;
 import reclamaciones.libro.com.libroreclamaciones.data.model.Sucursal;
 import reclamaciones.libro.com.libroreclamaciones.data.repository.remote.ServiceGenerator;
@@ -45,6 +47,7 @@ public class EnterprisePresenter implements EnterpriseContract.Presenter{
             getView().showLoadingDialog();
         }
 
+        Log.d("idSucursal",idSucursal+"");
         EnterpriseRequest enterpriseRequest = ServiceGenerator.createServicePython(EnterpriseRequest.class);
 
         Call<Sucursal> call = enterpriseRequest.getSucursal(idSucursal,idUser);
@@ -77,6 +80,49 @@ public class EnterprisePresenter implements EnterpriseContract.Presenter{
                 if (isAttached()) {
                     getView().showConnectionError();
                 }
+            }
+        });
+    }
+
+    @Override
+    public void sendComment(int idSucursal, int idUsuario, String message, int rating) {
+        if (isAttached()){
+            getView().showLoadingDialog();
+        }
+
+        EnterpriseRequest enterpriseRequest = ServiceGenerator.createServicePython(EnterpriseRequest.class);
+
+        Call<JsonObject> call = enterpriseRequest.sendComment(idSucursal,idUsuario,message,rating);
+
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                int status = response.code();
+                Log.d("Status",""+status);
+                if (response.isSuccessful()){
+                    JsonObject res = response.body();
+                    switch (status){
+                        case 200:
+                            if (isAttached()){
+                                if (res.get("msg").equals("Valoracion registrada satisfactoriamente")){
+                                    Log.d("Se envio","Si");
+                                }else if(res.get("msg").equals("Usted ya registro una valoracion para esta empresa")){
+                                    Log.d("No se envio","No");
+                                }
+                            }
+                            break;
+                        case 500:
+                            if (isAttached()){
+                                getView().showConnectionError();
+                            }
+                            break;
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+
             }
         });
     }

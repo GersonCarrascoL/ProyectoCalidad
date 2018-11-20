@@ -251,15 +251,18 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,GoogleM
                 CustomInfoWindowGoogleMap customInfoWindowGoogleMap = new CustomInfoWindowGoogleMap(getActivity());
                 mMap.setInfoWindowAdapter(customInfoWindowGoogleMap);
 
-                String snippet = "Distrito: " + branchOffices.get(i).getNombreDistrito() + "\n" +
+                String title = branchOffices.get(i).getNombreEmpresa() + "\n" +
+                        "Distrito: " + branchOffices.get(i).getNombreDistrito() + "\n" +
                         "Direccion: " + branchOffices.get(i).getDireccion();
+
+                String snippet = branchOffices.get(i).getIdSucursal()+"";
 
                 LatLng positionMarker = new LatLng(branchOffices.get(i).getLatitud(), branchOffices.get(i).getLongitud());
 
                 MarkerOptions markerOptions = new MarkerOptions();
                 markerOptions
                         .position(positionMarker)
-                        .title(branchOffices.get(i).getNombreEmpresa())
+                        .title(title)
                         .snippet(snippet)
                         .icon((BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
 
@@ -271,7 +274,8 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,GoogleM
                     @Override
                     public void onInfoWindowClick(Marker marker) {
                         Intent intent = new Intent(getActivity(), EnterpriseActivity.class);
-                        intent.putExtra("idSucursal",""+branchOffices.get(i_value).getIdSucursal());
+                        String idSucursal = marker.getSnippet();
+                        intent.putExtra("idSucursal",""+idSucursal);
                         startActivity(intent);
                     }
                 });
@@ -287,15 +291,18 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,GoogleM
                 CustomInfoWindowGoogleMap customInfoWindowGoogleMap = new CustomInfoWindowGoogleMap(getActivity());
                 mMap.setInfoWindowAdapter(customInfoWindowGoogleMap);
 
-                String snippet = "Distrito: " + branchOffices.get(i).getNombreDistrito() + "\n" +
+                String title = branchOffices.get(i).getNombreEmpresa() + "\n" +
+                        "Distrito: " + branchOffices.get(i).getNombreDistrito() + "\n" +
                         "Direccion: " + branchOffices.get(i).getDireccion();
+
+                String snippet = branchOffices.get(i).getIdSucursal()+"";
 
                 LatLng positionMarker = new LatLng(branchOffices.get(i).getLatitud(), branchOffices.get(i).getLongitud());
 
                 MarkerOptions markerOptions = new MarkerOptions();
                 markerOptions
                         .position(positionMarker)
-                        .title(branchOffices.get(i).getNombreEmpresa())
+                        .title(title)
                         .snippet(snippet)
                         .icon((BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
 
@@ -305,7 +312,8 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,GoogleM
                     @Override
                     public void onInfoWindowClick(Marker marker) {
                         Intent intent = new Intent(getActivity(), EnterpriseActivity.class);
-                        intent.putExtra("idSucursal",""+branchOffices.get(i_value).getIdSucursal());
+                        String idSucursal = marker.getSnippet();
+                        intent.putExtra("idSucursal",""+idSucursal);
                         startActivity(intent);
                     }
                 });

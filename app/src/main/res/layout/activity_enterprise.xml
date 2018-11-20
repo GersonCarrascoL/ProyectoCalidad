@@ -23,64 +23,73 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/profile_header"
+            <androidx.cardview.widget.CardView
+                android:layout_gravity="center_horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#fff"
-                android:orientation="vertical">
-
-
-                <TextView
-                    android:id="@+id/profile_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="10dp"
-                    android:text="Interbank"
-                    android:textColor="#000"
-                    android:textSize="30sp"
-                    android:textStyle="bold" />
+                android:layout_margin="10dp">
 
                 <LinearLayout
-                    android:id="@+id/profile_content_address"
+                    android:id="@+id/enterprise_header"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:padding="10dp">
+                    android:layout_height="wrap_content"
+                    android:background="#fff"
+                    android:orientation="vertical">
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="20dp"
-                        android:src="@drawable/ic_address_on_black_24dp" />
-
-                    <LinearLayout
+                    <TextView
+                        android:id="@+id/enterprise_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:gravity="center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/enterprise_name"
+                        android:textColor="#000"
+                        android:textSize="30sp"
+                        android:textStyle="bold" />
 
-                        <TextView
-                            android:id="@+id/profile_address"
+                    <LinearLayout
+                        android:id="@+id/enterprise_content_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:padding="10dp">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="20dp"
+                            android:src="@drawable/ic_address_on_black_24dp" />
+
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Av La Marina cuadra 26 Jr Snatuario"
-                            android:textColor="@color/secondaryTextColor"
-                            android:textSize="16dp" />
+                            android:orientation="vertical">
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Dirección"
-                            android:textSize="12dp" />
+                            <TextView
+                                android:id="@+id/enterprise_address"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/enterprise_address"
+                                android:textColor="@color/secondaryTextColor"
+                                android:textSize="16dp" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/enterprise_address"
+                                android:textSize="12dp" />
+                        </LinearLayout>
+
                     </LinearLayout>
+
 
                 </LinearLayout>
 
 
-            </LinearLayout>
 
+
+            </androidx.cardview.widget.CardView>
 
             <LinearLayout
                 android:id="@+id/profile_rating"
@@ -91,11 +100,11 @@
 
 
                 <TextView
-                    android:id="@+id/profile_valoracionGeneral"
+                    android:id="@+id/enterprise_rating"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="4.5"
+                    android:text="@string/enterprise_rating"
                     android:textColor="#000"
                     android:textSize="20sp" />
 
@@ -103,7 +112,7 @@
 
 
             <LinearLayout
-                android:id="@+id/empresa_valoracion"
+                android:id="@+id/enterprise_rating_star"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#fff"
@@ -114,54 +123,40 @@
                     android:id="@+id/ratingBar_general"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:isIndicator="true"
                     android:numStars="5"
-                    android:progressBackgroundTint="@color/secondaryColor"
-                    android:progressTint="@color/secondaryColor"
-                    android:rating="4.5"
-                    android:secondaryProgressTint="@color/secondaryColor" />
+                    android:stepSize="1" />
 
             </LinearLayout>
 
 
-            <LinearLayout
-                android:id="@+id/profile_rating3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#fff"
-                android:orientation="vertical">
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@color/primaryTextColor"
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/profile_valoracion3"
+                        android:id="@+id/enterprise_opinion_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
                         android:text="Opiniones"
                         android:textColor="#000"
                         android:textSize="20sp" />
 
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:orientation="horizontal"
                         android:paddingLeft="10sp">
 
                         <TextView
-                            android:id="@+id/profile_valoracion4"
+                            android:id="@+id/label_enterprise_personal_opinion"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-
                             android:layout_gravity="center_vertical"
                             android:text="Tú valoración:"
                             android:textColor="#000"
@@ -169,7 +164,7 @@
 
 
                         <LinearLayout
-                            android:id="@+id/empresa_valoracion4"
+                            android:id="@+id/enterprise_personal_opinion_star"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="#fff"
@@ -182,11 +177,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:numStars="5"
-                                android:progressBackgroundTint="@color/secondaryColor"
-                                android:progressTint="@color/secondaryColor"
-                                android:rating="4"
-                                android:secondaryProgressTint="@color/secondaryColor"
-                                style="?android:attr/ratingBarStyleSmall" />
+                                android:stepSize="1" />
 
                         </LinearLayout>
                     </LinearLayout>
@@ -195,231 +186,48 @@
 
                 </LinearLayout>
 
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:background="#fff"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="20dp"
+                    android:weightSum="10"
                     android:orientation="horizontal">
 
-                    <EditText
-                        android:id="@+id/comments_textbox"
-                        android:layout_width="268dp"
-                        android:layout_height="wrap_content"
-                        android:hint="Escribir comentario"
-                        android:inputType="textMultiLine"
-                        android:longClickable="false" />
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/label_personal_opinion"
+                        android:layout_width="wrap_content"
+                        android:layout_weight="8"
+                        android:layout_height="wrap_content">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/enterprise_personal_opinion"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/enterprise_comment"
+                            android:inputType="textMultiLine" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                    <ImageButton
+
+                    <ImageView
+                        android:id="@+id/enterprise_send_opinion"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
+                        android:layout_weight="2"
                         android:background="#fff"
+                        android:clickable="true"
                         android:src="@drawable/ic_send_black_24dp" />
                 </LinearLayout>
 
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/comments_list_rv"
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:orientation="vertical" android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_height="wrap_content">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#fff"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:padding="10dp">
-
-                    <ImageView
-                        android:id="@+id/profile_photo"
-                        android:layout_width="23dp"
-                        android:layout_height="23dp"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="10dp"
-                        android:src="@drawable/fotocircular" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/profile_email"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:paddingLeft="10dp"
-                                android:text="Juan Gomez"
-                                android:textColor="@color/secondaryTextColor"
-                                android:textSize="16dp" />
-
-                            <ImageButton
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentTop="true"
-                                android:layout_alignParentEnd="true"
-                                android:layout_marginEnd="47dp"
-                                android:background="#fff"
-                                android:src="@drawable/ic_edit_black_24dp" />
-
-                            <ImageButton
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentTop="true"
-                                android:layout_alignParentEnd="true"
-                                android:layout_marginEnd="15dp"
-                                android:background="#fff"
-                                android:src="@drawable/ic_delete_black_24dp" />
-
-                        </RelativeLayout>
-
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <RatingBar
-                                android:id="@+id/ratingBar_personal2"
-                                style="?android:attr/ratingBarStyleSmall"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:numStars="5"
-                                android:paddingLeft="10dp"
-
-                                android:progressBackgroundTint="@color/secondaryColor"
-                                android:progressTint="@color/secondaryColor"
-                                android:rating="4"
-                                android:secondaryProgressTint="@color/secondaryColor" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:paddingLeft="15dp"
-
-                                android:text="9/11/18" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="268dp"
-                                android:layout_height="match_parent"
-                                android:inputType="textMultiLine"
-                                android:text="Esta empresa es muy buena, no hay muchas colas y te atienden rapido " />
-
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#fff"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:padding="10dp">
-
-                    <ImageView
-                        android:id="@+id/profile_photo2"
-                        android:layout_width="23dp"
-                        android:layout_height="23dp"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="10dp"
-                        android:src="@drawable/fotocircular" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/profile_nombre"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:paddingLeft="10dp"
-                                android:text="Nicola Porchela"
-                                android:textColor="@color/secondaryTextColor"
-                                android:textSize="16dp" />
-
-                            <ImageButton
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentTop="true"
-                                android:layout_alignParentEnd="true"
-                                android:layout_marginEnd="15dp"
-                                android:background="#fff"
-                                android:src="@drawable/ic_report_black_24dp" />
-
-
-                        </RelativeLayout>
-
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <RatingBar
-                                android:id="@+id/ratingBar_personal3"
-                                style="?android:attr/ratingBarStyleSmall"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:numStars="5"
-                                android:paddingLeft="10dp"
-
-                                android:progressBackgroundTint="@color/secondaryColor"
-                                android:progressTint="@color/secondaryColor"
-                                android:rating="4"
-                                android:secondaryProgressTint="@color/secondaryColor" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:paddingLeft="15dp"
-
-                                android:text="9/11/18" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="268dp"
-                                android:layout_height="match_parent"
-                                android:inputType="textMultiLine"
-                                android:text="Esta empresa es muy buena, no hay muchas colas y te atienden rapido " />
-
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </LinearLayout>
+                </androidx.recyclerview.widget.RecyclerView>
 
         </LinearLayout>
     </ScrollView>

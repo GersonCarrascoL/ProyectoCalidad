@@ -24,7 +24,7 @@ public class CustomInfoWindowGoogleMap implements GoogleMap.InfoWindowAdapter {
 //    @BindView(R.id.enterprise_name)
     TextView enterprise_name;
 //    @BindView(R.id.enterprise_direction)
-    TextView enterprise_direction;
+    TextView enterprise_id;
 
 
     private Context context;
@@ -42,9 +42,9 @@ public class CustomInfoWindowGoogleMap implements GoogleMap.InfoWindowAdapter {
         enterprise_name.setText(title);
 
         String snippet = marker.getSnippet();
-        enterprise_direction = view.findViewById(R.id.enterprise_direction);
+        enterprise_id = view.findViewById(R.id.enterprise_id);
 
-        enterprise_direction.setText(snippet);
+        enterprise_id.setText(snippet);
     }
     @Override
     public View getInfoWindow(Marker marker) {

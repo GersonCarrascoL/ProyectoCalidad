@@ -15,6 +15,9 @@ public class Sucursal {
     @SerializedName("direccion")
     @Expose
     private String direccion;
+    @SerializedName("puntaje_promedio")
+    @Expose
+    private Integer puntaje_promedio;
     @SerializedName("comentario_usuario")
     @Expose
     private List<ComentarioUsuario> comentarioUsuario = null;
@@ -62,4 +65,11 @@ public class Sucursal {
         this.comentarios = comentarios;
     }
 
+    public Integer getPuntaje_promedio() {
+        return puntaje_promedio;
+    }
+
+    public void setPuntaje_promedio(Integer puntaje_promedio) {
+        this.puntaje_promedio = puntaje_promedio;
+    }
 }

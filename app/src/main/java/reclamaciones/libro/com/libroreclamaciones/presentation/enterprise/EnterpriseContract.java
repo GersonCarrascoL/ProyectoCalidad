@@ -9,11 +9,13 @@ public interface EnterpriseContract {
         void showLoadingDialog();
         void hideLoadingDialog();
         void showConnectionError();
+        void showCompleteMessageFormSnackbar();
     }
 
     interface Presenter{
         void onViewDettach();
         void onViewAttach(EnterpriseContract.View view);
         void getSucursal(int idSucursal, int idUsuario);
+        void sendComment(int idSucursal,int idUsuario,String message,int rating);
     }
 }
