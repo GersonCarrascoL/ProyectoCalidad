@@ -1,9 +1,12 @@
 language: java
-
-before_install:
- - chmod +x gradlew
-
+sudo: false
+ 
+cache:
+  directories:
+  - "$HOME/.m2"
+ 
+before_cache:
+  - rm -rf $HOME/.m2/repository/com/autentia/traviscodacy
+ 
 jdk:
   - oraclejdk8
-
-install: ./gradlew assemble --stacktrace
