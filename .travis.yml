@@ -5,3 +5,5 @@ before_install:
 
 jdk:
   - oraclejdk8
+
+install: ./gradlew assemble --stacktrace
