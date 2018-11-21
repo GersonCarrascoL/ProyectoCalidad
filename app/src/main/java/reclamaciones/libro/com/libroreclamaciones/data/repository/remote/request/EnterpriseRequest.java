@@ -14,6 +14,7 @@ public interface EnterpriseRequest {
     @POST("detalles-sucursal")
     Call<Sucursal> getSucursal(@Field("idSucursal") int idSucursal,
                                @Field("idUsuario") int idUsuario);
+
     @FormUrlEncoded
     @POST("registro-valoracion")
     Call<JsonObject> sendComment(@Field("idSucursal") int idSucursal,
