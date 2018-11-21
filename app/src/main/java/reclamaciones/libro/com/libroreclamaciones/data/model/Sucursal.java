@@ -8,7 +8,7 @@ public class Sucursal {
 
     @SerializedName("idSucursal")
     @Expose
-    private Integer idSucursal;
+    private String idSucursal;
     @SerializedName("nombreEmpresa")
     @Expose
     private String nombreEmpresa;
@@ -17,7 +17,7 @@ public class Sucursal {
     private String direccion;
     @SerializedName("puntaje_promedio")
     @Expose
-    private Integer puntaje_promedio;
+    private Float puntajePromedio;
     @SerializedName("comentario_usuario")
     @Expose
     private List<ComentarioUsuario> comentarioUsuario = null;
@@ -25,11 +25,11 @@ public class Sucursal {
     @Expose
     private List<Comentario> comentarios = null;
 
-    public Integer getIdSucursal() {
+    public String getIdSucursal() {
         return idSucursal;
     }
 
-    public void setIdSucursal(Integer idSucursal) {
+    public void setIdSucursal(String idSucursal) {
         this.idSucursal = idSucursal;
     }
 
@@ -49,6 +49,14 @@ public class Sucursal {
         this.direccion = direccion;
     }
 
+    public Float getPuntajePromedio() {
+        return puntajePromedio;
+    }
+
+    public void setPuntajePromedio(Float puntajePromedio) {
+        this.puntajePromedio = puntajePromedio;
+    }
+
     public List<ComentarioUsuario> getComentarioUsuario() {
         return comentarioUsuario;
     }
@@ -63,13 +71,5 @@ public class Sucursal {
 
     public void setComentarios(List<Comentario> comentarios) {
         this.comentarios = comentarios;
-    }
-
-    public Integer getPuntaje_promedio() {
-        return puntaje_promedio;
-    }
-
-    public void setPuntaje_promedio(Integer puntaje_promedio) {
-        this.puntaje_promedio = puntaje_promedio;
     }
 }

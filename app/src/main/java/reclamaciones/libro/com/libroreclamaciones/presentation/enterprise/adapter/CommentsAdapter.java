@@ -32,7 +32,7 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.Commen
             super(itemView);
             cv = itemView.findViewById(R.id.comment_card);
             personName = itemView.findViewById(R.id.person_name);
-            personRating = itemView.findViewById(R.id.person_rating);
+            personRating = itemView.findViewById(R.id.person_rating_comment);
             personComment = itemView.findViewById(R.id.person_comment);
             commentDate = itemView.findViewById(R.id.comment_date);
         }
@@ -52,6 +52,7 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.Commen
         holder.personName.setText(comments.get(position).getNombreUsuario());
         holder.personComment.setText(comments.get(position).getComentario());
         holder.commentDate.setText(comments.get(position).getFecha());
+        holder.personRating.setRating(comments.get(position).getPuntaje());
     }
 
 

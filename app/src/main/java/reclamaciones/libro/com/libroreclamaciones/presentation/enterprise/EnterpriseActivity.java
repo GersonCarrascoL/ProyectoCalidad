@@ -8,6 +8,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import reclamaciones.libro.com.libroreclamaciones.R;
+import reclamaciones.libro.com.libroreclamaciones.data.model.ResponseValoracion;
 import reclamaciones.libro.com.libroreclamaciones.data.model.Sucursal;
 import reclamaciones.libro.com.libroreclamaciones.data.repository.local.SessionManager;
 import reclamaciones.libro.com.libroreclamaciones.presentation.enterprise.adapter.CommentsAdapter;
@@ -23,6 +24,7 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -46,6 +48,22 @@ public class EnterpriseActivity extends AppCompatActivity implements EnterpriseC
     TextInputEditText enterprise_personal_opinion;
     @BindView(R.id.enterprise_send_opinion)
     ImageView enterprise_send_opinion;
+    @BindView(R.id.linear_comment)
+    LinearLayout linear_comment;
+    @BindView(R.id.layout_send_comment)
+    LinearLayout layout_send_comment;
+    @BindView(R.id.layout_comment_personal_card)
+    LinearLayout layout_comment_personal_card;
+
+    /*---INFO PERSONAL CARD---*/
+    @BindView(R.id.card_person_name)
+    TextView card_person_name;
+    @BindView(R.id.card_person_rating_comment)
+    RatingBar card_person_rating_comment;
+    @BindView(R.id.card_comment_date)
+    TextView card_comment_date;
+    @BindView(R.id.card_person_comment)
+    TextView card_person_comment;
 
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
@@ -77,6 +95,7 @@ public class EnterpriseActivity extends AppCompatActivity implements EnterpriseC
         toolbar = findViewById(R.id.toolbar_general);
         ratingBar = findViewById(R.id.ratingBar_general);
         person_rating = findViewById(R.id.ratingBar_personal);
+//        person_rating_card = findViewById(R.id.person_rating_comment);
         profile_valoracionGeneral = findViewById(R.id.enterprise_rating);
         recyclerView = findViewById(R.id.comments_list_rv);
         recyclerView.setHasFixedSize(true);
@@ -132,8 +151,9 @@ public class EnterpriseActivity extends AppCompatActivity implements EnterpriseC
         flag = true;
 
         validateMessage();
+
         if (flag){
-            getPresenter().sendComment(Integer.parseInt(idSucursal),idUser,enterprise_personal_opinion.getText().toString(),5);
+            getPresenter().sendComment(Integer.parseInt(idSucursal),idUser,enterprise_personal_opinion.getText().toString(),person_rating.getRating());
         }else {
             showCompleteMessageFormSnackbar();
         }
@@ -167,14 +187,35 @@ public class EnterpriseActivity extends AppCompatActivity implements EnterpriseC
 
     @Override
     public void setInfo(Sucursal sucursal) {
-        Log.d("Sucursal Nombre", sucursal.getPuntaje_promedio().toString());
+
+        Log.d("Sucursal Nombre", sucursal.getPuntajePromedio().toString());
         enterprise_name.setText(sucursal.getNombreEmpresa());
         enterprise_address.setText(sucursal.getDireccion());
-        enterprise_rating.setText(sucursal.getPuntaje_promedio().toString());
-        ratingBar.setRating(sucursal.getPuntaje_promedio());
+        enterprise_rating.setText(sucursal.getPuntajePromedio().toString());
+        ratingBar.setRating(sucursal.getPuntajePromedio());
+
+        Log.d("TAMAÑO COMENTARIO",sucursal.getComentarioUsuario().size()+"");
+        if (sucursal.getComentarioUsuario().size() > 0){
+            layout_comment_personal_card.setVisibility(LinearLayout.VISIBLE);
+            card_person_name.setText(sucursal.getComentarioUsuario().get(0).getNombreUsuario());
+            card_comment_date.setText(sucursal.getComentarioUsuario().get(0).getFecha());
+            card_person_comment.setText(sucursal.getComentarioUsuario().get(0).getComentario());
+            card_person_rating_comment.setRating(sucursal.getComentarioUsuario().get(0).getPuntaje());
+            layout_send_comment.setVisibility(LinearLayout.GONE);
+        }
 
         commentsAdapter = new CommentsAdapter(sucursal.getComentarios());
         recyclerView.setAdapter(commentsAdapter);
+    }
+
+    @Override
+    public void setResponseValoracion(ResponseValoracion responseValoracion) {
+        layout_comment_personal_card.setVisibility(LinearLayout.VISIBLE);
+        card_person_name.setText(responseValoracion.getValoracion().getNombreUsuario());
+        card_comment_date.setText(responseValoracion.getValoracion().getFecha());
+        card_person_comment.setText(responseValoracion.getValoracion().getComentario());
+        card_person_rating_comment.setRating(responseValoracion.getValoracion().getPuntaje());
+        layout_send_comment.setVisibility(LinearLayout.GONE);
     }
 
     @Override
@@ -185,6 +226,11 @@ public class EnterpriseActivity extends AppCompatActivity implements EnterpriseC
     @Override
     public void hideLoadingDialog() {
         mProgressDialog.hide();
+    }
+
+    @Override
+    public void showValorationDuplicateError() {
+        Snackbar.make(getWindow().getDecorView().getRootView(),getResources().getString(R.string.enterprise_valoration_duplicate),Snackbar.LENGTH_LONG);
     }
 
     @Override

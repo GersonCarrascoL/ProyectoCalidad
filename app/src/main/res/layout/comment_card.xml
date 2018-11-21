@@ -52,7 +52,7 @@
                     android:orientation="horizontal">
 
                     <RatingBar
-                        android:id="@+id/person_rating"
+                        android:id="@+id/person_rating_comment"
                         style="?android:attr/ratingBarStyleSmall"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

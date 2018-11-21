@@ -2,6 +2,7 @@ package reclamaciones.libro.com.libroreclamaciones.data.repository.remote.reques
 
 import com.google.gson.JsonObject;
 
+import reclamaciones.libro.com.libroreclamaciones.data.model.ResponseValoracion;
 import reclamaciones.libro.com.libroreclamaciones.data.model.Sucursal;
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -17,8 +18,8 @@ public interface EnterpriseRequest {
 
     @FormUrlEncoded
     @POST("registro-valoracion")
-    Call<JsonObject> sendComment(@Field("idSucursal") int idSucursal,
-                                 @Field("idUsuario") int idUsuario,
-                                 @Field("comentario") String comment,
-                                 @Field("puntaje") int rating);
+    Call<ResponseValoracion> sendComment(@Field("idSucursal") int idSucursal,
+                                         @Field("idUsuario") int idUsuario,
+                                         @Field("comentario") String comment,
+                                         @Field("puntaje") float rating);
 }

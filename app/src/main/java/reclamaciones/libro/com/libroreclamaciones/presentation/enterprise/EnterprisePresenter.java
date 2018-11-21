@@ -6,6 +6,7 @@ import android.util.Log;
 import com.google.gson.JsonObject;
 
 import androidx.annotation.Nullable;
+import reclamaciones.libro.com.libroreclamaciones.data.model.ResponseValoracion;
 import reclamaciones.libro.com.libroreclamaciones.data.model.Sucursal;
 import reclamaciones.libro.com.libroreclamaciones.data.repository.remote.ServiceGenerator;
 import reclamaciones.libro.com.libroreclamaciones.data.repository.remote.request.EnterpriseRequest;
@@ -58,22 +59,23 @@ public class EnterprisePresenter implements EnterpriseContract.Presenter{
 
                 int status = response.code();
                 Log.d("Response status",status+"");
-                if (response.isSuccessful()){
-                    Sucursal sucursal = response.body();
-                    switch (status){
-                        case 200:
-                            if (isAttached()){
-                                getView().setInfo(sucursal);
-                            }
-                            break;
-                        case 500:
-                            if (isAttached()){
-                                getView().showConnectionError();
-                            }
-                            break;
-                    }
+
+                Sucursal sucursal = response.body();
+                Log.d("Sucursal",sucursal.toString()+"");
+                switch (status){
+                    case 200:
+                        if (isAttached()){
+                            getView().setInfo(sucursal);
+                        }
+                        break;
+                    case 500:
+                        if (isAttached()){
+                            getView().showConnectionError();
+                        }
+                        break;
                 }
             }
+
 
             @Override
             public void onFailure(Call<Sucursal> call, Throwable t) {
@@ -85,34 +87,38 @@ public class EnterprisePresenter implements EnterpriseContract.Presenter{
     }
 
     @Override
-    public void sendComment(int idSucursal, int idUsuario, String message, int rating) {
+    public void sendComment(int idSucursal, int idUsuario, String message, float rating) {
         if (isAttached()){
             getView().showLoadingDialog();
         }
 
         EnterpriseRequest enterpriseRequest = ServiceGenerator.createServicePython(EnterpriseRequest.class);
 
-        Call<JsonObject> call = enterpriseRequest.sendComment(idSucursal,idUsuario,message,rating);
+        Call<ResponseValoracion> call = enterpriseRequest.sendComment(idSucursal,idUsuario,message,rating);
 
-        call.enqueue(new Callback<JsonObject>() {
+        call.enqueue(new Callback<ResponseValoracion>() {
             @Override
-            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+            public void onResponse(Call<ResponseValoracion> call, Response<ResponseValoracion> response) {
                 int status = response.code();
                 Log.d("Status",""+status);
                 if (response.isSuccessful()){
-                    JsonObject res = response.body();
+                    ResponseValoracion res = response.body();
                     switch (status){
+                        case 201:
+                            if (isAttached()){
+                                getView().hideLoadingDialog();
+                                getView().setResponseValoracion(res);
+                            }
+                            break;
                         case 200:
                             if (isAttached()){
-                                if (res.get("msg").equals("Valoracion registrada satisfactoriamente")){
-                                    Log.d("Se envio","Si");
-                                }else if(res.get("msg").equals("Usted ya registro una valoracion para esta empresa")){
-                                    Log.d("No se envio","No");
-                                }
+                                getView().hideLoadingDialog();
+                                getView().showValorationDuplicateError();
                             }
                             break;
                         case 500:
                             if (isAttached()){
+                                getView().hideLoadingDialog();
                                 getView().showConnectionError();
                             }
                             break;
@@ -121,7 +127,7 @@ public class EnterprisePresenter implements EnterpriseContract.Presenter{
             }
 
             @Override
-            public void onFailure(Call<JsonObject> call, Throwable t) {
+            public void onFailure(Call<ResponseValoracion> call, Throwable t) {
 
             }
         });
