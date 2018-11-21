@@ -5,10 +5,12 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -264,7 +266,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,GoogleM
                         .position(positionMarker)
                         .title(title)
                         .snippet(snippet)
-                        .icon((BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+                        .icon((BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
 
                 Marker m = mMap.addMarker(markerOptions);
 
@@ -304,7 +306,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,GoogleM
                         .position(positionMarker)
                         .title(title)
                         .snippet(snippet)
-                        .icon((BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+                        .icon((BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
 
                 Marker m = mMap.addMarker(markerOptions);
 
@@ -341,6 +343,5 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,GoogleM
         marker.showInfoWindow();
         return true;
     }
-
 
 }
