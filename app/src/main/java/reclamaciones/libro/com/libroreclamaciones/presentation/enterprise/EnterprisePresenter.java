@@ -92,6 +92,12 @@ public class EnterprisePresenter implements EnterpriseContract.Presenter{
             getView().showLoadingDialog();
         }
 
+        Log.d("Empresa Data","Envio de mensajes");
+        Log.d("Empresa idUser",idUsuario+"");
+        Log.d("Empresa idSucursal",idSucursal+"");
+        Log.d("Empresa rating",rating+"");
+        Log.d("Empresa message",message+"");
+
         EnterpriseRequest enterpriseRequest = ServiceGenerator.createServicePython(EnterpriseRequest.class);
 
         Call<ResponseValoracion> call = enterpriseRequest.sendComment(idSucursal,idUsuario,message,rating);
@@ -99,31 +105,32 @@ public class EnterprisePresenter implements EnterpriseContract.Presenter{
         call.enqueue(new Callback<ResponseValoracion>() {
             @Override
             public void onResponse(Call<ResponseValoracion> call, Response<ResponseValoracion> response) {
+                Log.d("Response",""+response);
                 int status = response.code();
                 Log.d("Status",""+status);
-                if (response.isSuccessful()){
-                    ResponseValoracion res = response.body();
-                    switch (status){
-                        case 201:
-                            if (isAttached()){
-                                getView().hideLoadingDialog();
-                                getView().setResponseValoracion(res);
-                            }
-                            break;
-                        case 200:
-                            if (isAttached()){
-                                getView().hideLoadingDialog();
-                                getView().showValorationDuplicateError();
-                            }
-                            break;
-                        case 500:
-                            if (isAttached()){
-                                getView().hideLoadingDialog();
-                                getView().showConnectionError();
-                            }
-                            break;
-                    }
+
+                ResponseValoracion res = response.body();
+                switch (status){
+                    case 201:
+                        if (isAttached()){
+                            getView().hideLoadingDialog();
+                            getView().setResponseValoracion(res);
+                        }
+                        break;
+                    case 200:
+                        if (isAttached()){
+                            getView().hideLoadingDialog();
+                            getView().showValorationDuplicateError();
+                        }
+                        break;
+                    case 500:
+                        if (isAttached()){
+                            getView().hideLoadingDialog();
+                            getView().showConnectionError();
+                        }
+                        break;
                 }
+
             }
 
             @Override

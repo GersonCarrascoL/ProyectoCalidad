@@ -21,6 +21,9 @@ public class Sucursal {
     @SerializedName("comentario_usuario")
     @Expose
     private List<ComentarioUsuario> comentarioUsuario = null;
+    @SerializedName("estado_comentario")
+    @Expose
+    private Integer estadoComentario;
     @SerializedName("comentarios")
     @Expose
     private List<Comentario> comentarios = null;
@@ -59,6 +62,14 @@ public class Sucursal {
 
     public List<ComentarioUsuario> getComentarioUsuario() {
         return comentarioUsuario;
+    }
+
+    public Integer getEstadoComentario() {
+        return estadoComentario;
+    }
+
+    public void setEstadoComentario(Integer estadoComentario) {
+        this.estadoComentario = estadoComentario;
     }
 
     public void setComentarioUsuario(List<ComentarioUsuario> comentarioUsuario) {

@@ -63,7 +63,8 @@
     <string name="enterprise_send_message_error">No ha escrito ningún mensaje</string>
     <string name="enterprise_card_personal_title">Mi valoración:</string>
     <string name="enterprise_other_opinion_title">Otras valoraciones: </string>
-    <string name="enterprise_valoration_duplicate">Usted ya tiene registrado un comentario</string>
+    <string name="enterprise_valoration_duplicate">Usted ya tiene registrado un comentario.</string>
+    <string name="enterprise_comment_delete">Su comentario ha sido eliminado.</string>
 
     //PROFILE
     <string name="profile_name">Nombre</string>

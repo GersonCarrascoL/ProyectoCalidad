@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import id.zelory.compressor.Compressor;
 import pub.devrel.easypermissions.EasyPermissions;
 import reclamaciones.libro.com.libroreclamaciones.R;
 import reclamaciones.libro.com.libroreclamaciones.presentation.login.LoginActivity;
@@ -147,7 +148,7 @@ public class ClaimActivity extends AppCompatActivity implements ClaimContract.Vi
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(),imageUri);
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.JPEG,100,baos);
+                bitmap.compress(Bitmap.CompressFormat.JPEG,30,baos);
                 byte[] b = baos.toByteArray();
 
                 encodedImage = Base64.encodeToString(b,Base64.DEFAULT);

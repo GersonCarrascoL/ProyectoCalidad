@@ -54,6 +54,8 @@ public class EnterpriseActivity extends AppCompatActivity implements EnterpriseC
     LinearLayout layout_send_comment;
     @BindView(R.id.layout_comment_personal_card)
     LinearLayout layout_comment_personal_card;
+    @BindView(R.id.layout_comment_delete)
+    LinearLayout layout_comment_delete;
 
     /*---INFO PERSONAL CARD---*/
     @BindView(R.id.card_person_name)
@@ -111,6 +113,9 @@ public class EnterpriseActivity extends AppCompatActivity implements EnterpriseC
 
         Intent intent = getIntent();
         idSucursal = intent.getStringExtra("idSucursal");
+
+        Log.d("Empresa idUser",idUser+"");
+        Log.d("Empresa idSucursal",idSucursal+"");
 
         toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
         setSupportActionBar(toolbar);
@@ -195,14 +200,34 @@ public class EnterpriseActivity extends AppCompatActivity implements EnterpriseC
         ratingBar.setRating(sucursal.getPuntajePromedio());
 
         Log.d("TAMAÑO COMENTARIO",sucursal.getComentarioUsuario().size()+"");
-        if (sucursal.getComentarioUsuario().size() > 0){
-            layout_comment_personal_card.setVisibility(LinearLayout.VISIBLE);
-            card_person_name.setText(sucursal.getComentarioUsuario().get(0).getNombreUsuario());
-            card_comment_date.setText(sucursal.getComentarioUsuario().get(0).getFecha());
-            card_person_comment.setText(sucursal.getComentarioUsuario().get(0).getComentario());
-            card_person_rating_comment.setRating(sucursal.getComentarioUsuario().get(0).getPuntaje());
-            layout_send_comment.setVisibility(LinearLayout.GONE);
+
+        switch (sucursal.getEstadoComentario()){
+            case -1:
+                layout_comment_delete.setVisibility(LinearLayout.VISIBLE);
+                layout_send_comment.setVisibility(LinearLayout.GONE);
+                break;
+
+            case 1:
+                layout_comment_personal_card.setVisibility(LinearLayout.VISIBLE);
+                card_person_name.setText(sucursal.getComentarioUsuario().get(0).getNombreUsuario());
+                card_comment_date.setText(sucursal.getComentarioUsuario().get(0).getFecha());
+                card_person_comment.setText(sucursal.getComentarioUsuario().get(0).getComentario());
+                card_person_rating_comment.setRating(sucursal.getComentarioUsuario().get(0).getPuntaje());
+                layout_send_comment.setVisibility(LinearLayout.GONE);
+                break;
+
+            default:
+                break;
         }
+
+//        if (sucursal.getEstadoComentario() == 0){
+//            layout_comment_personal_card.setVisibility(LinearLayout.VISIBLE);
+//            card_person_name.setText(sucursal.getComentarioUsuario().get(0).getNombreUsuario());
+//            card_comment_date.setText(sucursal.getComentarioUsuario().get(0).getFecha());
+//            card_person_comment.setText(sucursal.getComentarioUsuario().get(0).getComentario());
+//            card_person_rating_comment.setRating(sucursal.getComentarioUsuario().get(0).getPuntaje());
+//            layout_send_comment.setVisibility(LinearLayout.GONE);
+//        }
 
         commentsAdapter = new CommentsAdapter(sucursal.getComentarios());
         recyclerView.setAdapter(commentsAdapter);
