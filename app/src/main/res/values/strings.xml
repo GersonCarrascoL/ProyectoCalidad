@@ -65,6 +65,8 @@
     <string name="enterprise_other_opinion_title">Otras valoraciones: </string>
     <string name="enterprise_valoration_duplicate">Usted ya tiene registrado un comentario.</string>
     <string name="enterprise_comment_delete">Su comentario ha sido eliminado.</string>
+    <string name="enterprise_error_comment">Hubo un problema al registrar el comentario.</string>
+    <string name="enterprise_comment_success">Su comentario se registró satisfactoriamente.</string>
 
     //PROFILE
     <string name="profile_name">Nombre</string>

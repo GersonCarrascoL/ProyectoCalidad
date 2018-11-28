@@ -12,6 +12,8 @@ public interface EnterpriseContract {
         void hideLoadingDialog();
         void showValorationDuplicateError();
         void showConnectionError();
+        void showErrorSaveComment();
+        void showCommentSuccessfull();
         void showCompleteMessageFormSnackbar();
     }
 

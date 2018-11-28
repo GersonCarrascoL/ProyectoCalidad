@@ -220,14 +220,6 @@ public class EnterpriseActivity extends AppCompatActivity implements EnterpriseC
                 break;
         }
 
-//        if (sucursal.getEstadoComentario() == 0){
-//            layout_comment_personal_card.setVisibility(LinearLayout.VISIBLE);
-//            card_person_name.setText(sucursal.getComentarioUsuario().get(0).getNombreUsuario());
-//            card_comment_date.setText(sucursal.getComentarioUsuario().get(0).getFecha());
-//            card_person_comment.setText(sucursal.getComentarioUsuario().get(0).getComentario());
-//            card_person_rating_comment.setRating(sucursal.getComentarioUsuario().get(0).getPuntaje());
-//            layout_send_comment.setVisibility(LinearLayout.GONE);
-//        }
 
         commentsAdapter = new CommentsAdapter(sucursal.getComentarios());
         recyclerView.setAdapter(commentsAdapter);
@@ -261,6 +253,16 @@ public class EnterpriseActivity extends AppCompatActivity implements EnterpriseC
     @Override
     public void showConnectionError() {
         Snackbar.make(getWindow().getDecorView().getRootView(),getResources().getString(R.string.error_connect),Snackbar.LENGTH_LONG);
+    }
+
+    @Override
+    public void showErrorSaveComment() {
+        Snackbar.make(getWindow().getDecorView().getRootView(),getResources().getString(R.string.enterprise_error_comment),Snackbar.LENGTH_LONG);
+    }
+
+    @Override
+    public void showCommentSuccessfull() {
+        Snackbar.make(getWindow().getDecorView().getRootView(),getResources().getString(R.string.enterprise_comment_success),Snackbar.LENGTH_LONG);
     }
 
     @Override

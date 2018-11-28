@@ -15,11 +15,15 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import reclamaciones.libro.com.libroreclamaciones.data.repository.local.SessionManager;
 import reclamaciones.libro.com.libroreclamaciones.presentation.main.maps.MapsFragment;
 
@@ -31,7 +35,7 @@ import reclamaciones.libro.com.libroreclamaciones.presentation.login.LoginActivi
 import com.google.android.material.navigation.NavigationView;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
-public class MainNavigationActivity extends AppCompatActivity implements MainNavigationContract{
+public class MainNavigationActivity extends AppCompatActivity implements MainNavigationContract {
 
     private DrawerLayout drawerLayout;
     private boolean searchMapFragment = true;
@@ -40,6 +44,8 @@ public class MainNavigationActivity extends AppCompatActivity implements MainNav
     private String[] suggestions;
     private MaterialSearchView searchView;
     private SessionManager session;
+    private TextView userName;
+    private TextView email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +59,14 @@ public class MainNavigationActivity extends AppCompatActivity implements MainNav
 
         NavigationView navigationView = findViewById(R.id.navigation_view);
 
+        View headerNavigation = navigationView.getHeaderView(0);
+        userName = headerNavigation.findViewById(R.id.username);
+        email = headerNavigation.findViewById(R.id.email);
+
+        session = SessionManager.getInstance(getApplicationContext());
+
+        userName.setText(session.getUserName());
+        email.setText(session.getUserEmail());
 
         if( navigationView != null ){
             setupDrawerContent(navigationView);
@@ -171,7 +185,6 @@ public class MainNavigationActivity extends AppCompatActivity implements MainNav
 
     @Override
     public void startLogOutActivity() {
-        session = SessionManager.getInstance(getApplicationContext());
         session.logOut();
         Intent loginIntent = new Intent().setClass(MainNavigationActivity.this,LoginActivity.class);
         loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);

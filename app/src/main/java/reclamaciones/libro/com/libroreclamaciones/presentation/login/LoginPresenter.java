@@ -64,11 +64,15 @@ public class LoginPresenter implements LoginContract.Presenter{
                     case 200:
                         String token = jsonObject.get("token").getAsString();
                         int idUser = jsonObject.get("idUsuario").getAsInt();
+                        String userName = jsonObject.get("userName").getAsString();
+                        String userEmail = jsonObject.get("userEmail").getAsString();
                         Log.d("TOKEN: ",token);
                         Log.d("IDUSUARIO: ",idUser+"");
 
                         session.setIdUser(idUser);
                         session.setKeyToken(token);
+                        session.setUserEmail(userEmail);
+                        session.setUserName(userName);
 
                         session.login();
                         if (isAttached()){

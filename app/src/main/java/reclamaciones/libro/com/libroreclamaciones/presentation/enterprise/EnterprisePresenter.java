@@ -113,14 +113,22 @@ public class EnterprisePresenter implements EnterpriseContract.Presenter{
                 switch (status){
                     case 201:
                         if (isAttached()){
+                            Log.d("Cerrando dialogo",status+"");
                             getView().hideLoadingDialog();
                             getView().setResponseValoracion(res);
+                            getView().showCommentSuccessfull();
                         }
                         break;
                     case 200:
                         if (isAttached()){
                             getView().hideLoadingDialog();
                             getView().showValorationDuplicateError();
+                        }
+                        break;
+                    case 400:
+                        if (isAttached()){
+                            getView().hideLoadingDialog();
+                            getView().showConnectionError();
                         }
                         break;
                     case 500:

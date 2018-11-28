@@ -31,6 +31,8 @@ public class SessionManager {
     private static final String KEY_SESSION = "session";
     private static final String KEY_TOKEN = "token";
     private static final String KEY_ID_USER = "iduser";
+    private static final String KEY_USER_NAME = "username";
+    private static final String KEY_EMAIL = "useremail";
 
     public void setKeyToken(String token){
         editor.putString(KEY_TOKEN,"Bearer "+token);
@@ -59,6 +61,24 @@ public class SessionManager {
 
     public int getIdUser(){
         return preferences.getInt(KEY_ID_USER,0);
+    }
+
+    public void setUserName(String userName){
+        editor.putString(KEY_USER_NAME,userName);
+        editor.commit();
+    }
+
+    public String getUserName(){
+        return preferences.getString(KEY_USER_NAME,"");
+    }
+
+    public void setUserEmail(String userEmail){
+        editor.putString(KEY_EMAIL,userEmail);
+        editor.commit();
+    }
+
+    public String getUserEmail(){
+        return preferences.getString(KEY_EMAIL,"");
     }
 
     public boolean isActive(){

@@ -28,7 +28,7 @@
         <activity android:name=".presentation.login.LoginActivity" />
         <activity android:name=".presentation.register.view_one.RegisterActivity" />
         <activity android:name=".presentation.main.MainNavigationActivity" />
-        <activity android:name=".presentation.enterprise.EnterpriseActivity" />
+        <activity android:name=".presentation.enterprise.EnterpriseActivity" android:windowSoftInputMode="stateVisible|adjustResize"/>
 
         <!--
             The API key for Google Maps-based APIs is defined as a string resource.
